@@ -1,0 +1,27 @@
+<!-- Mostrar tiempo restante -->
+<div class="timer">
+  Tiempo restante: {{ formatTime(timeLeft) }}
+</div>
+<div *ngFor="let pregunta of preguntas">
+  <p>{{ pregunta.pregunta }}</p>
+  <!-- Mostrar código si existe -->
+  <pre *ngIf="pregunta.codigo" [innerText]="pregunta.codigo"></pre>
+  <div *ngFor="let opcion of pregunta.opciones">
+    <input type="checkbox" [id]="opcion.opcion" (change)="seleccionarRespuesta(pregunta.id, opcion.opcion)">
+    <label [for]="opcion.opcion">{{ opcion.texto }}</label>
+  </div>
+</div>
+<button (click)="finalizarCuestionario()">Finalizar</button>
+<!-- Añade aquí la lógica para mostrar las respuestas correctas y la explicación después de finalizar -->
+<div *ngIf="mostrarResultados">
+  <div *ngFor="let pregunta of preguntas">
+    <p>{{ pregunta.pregunta }}</p>
+    <ul>
+      <li *ngFor="let opcion of pregunta.opciones">
+        <span [ngClass]="{'correcta': pregunta.respuestasCorrectas.includes(opcion.opcion), 'incorrecta': !pregunta.respuestasCorrectas.includes(opcion.opcion)}">{{ opcion.texto }}</span>
+      </li>
+    </ul>
+    <p>Explicación: {{ pregunta.explicacion }}</p>
+  </div>
+  <p>Tu puntuación es: {{ puntuacion }}</p>
+</div>

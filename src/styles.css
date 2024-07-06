@@ -1,1 +1,9 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --ng-doc-navbar-height: 70px; /* Adjusted navbar height */
+  --ng-doc-app-horizontal-padding: calc(var(--ng-doc-base-gutter) * 3);
+  --ng-doc-navbar-background: var(--ng-doc-base-4);
+}
+
+/* Additional custom styles for the navbar and sidebar */
+
+

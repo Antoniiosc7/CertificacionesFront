@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="row justify-content-center vertical-center">
+    <div *ngIf="message" class="alert alert-{{ messageType }} custom-alert">
+      {{ message }}
+      <button class="close-btn" (click)="closeMessage()">&times;</button>
+    </div>
+      <h1 class="text-center mb-4">Iniciar sesión</h1>
+      <form (ngSubmit)="onLogin()">
+        <div class="form-group mb-12">
+          <div><label for="username">Nombre de usuario</label></div>
+          <div><input type="text" class="form-control" id="username" placeholder="Introduce tu nombre de usuario" [(ngModel)]="username" name="username"></div>
+        </div>
+        <div class="form-group mb-3">
+          <div><label for="password">Contraseña</label></div>
+          <div><input type="password" class="form-control" id="password" placeholder="Introduce tu contraseña" [(ngModel)]="password" name="password"></div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block mb-2">Iniciar sesión</button>
+      </form>
+  </div>
+</div>
