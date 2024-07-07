@@ -29,6 +29,7 @@ export class LoginComponent implements OnInit {
     this.isSubmitting = true; // Indica que el inicio de sesión ha comenzado
     this.authService.login({username: this.username, password: this.password}).subscribe(
       response => {
+        localStorage.setItem('idUser', response.idUser);
         localStorage.setItem('accessToken', response.accessToken);
         localStorage.setItem('tokenType', response.tokenType);
         this.message = 'Inicio de sesión exitoso';

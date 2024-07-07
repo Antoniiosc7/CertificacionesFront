@@ -22,8 +22,25 @@ export class RegisterComponent implements OnInit {
   constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.promptForCredentials();
   }
 
+  promptForCredentials() {
+    let user = '';
+    let pass = '';
+
+    while (user !== 'admin' || pass !== 'admin1234') {
+      let user = window.prompt('Introduce tu nombre de usuario:');
+      let pass = window.prompt('Introduce tu contraseña:');
+
+      if (user === 'admin' && pass === 'admin1234') {
+
+        break;
+      } else {
+        alert('Credenciales incorrectas. Intenta de nuevo.');
+      }
+    }
+  }
   onRegister(): void {
     this.authService.register({username: this.username, password: this.password}).subscribe(
       response => {

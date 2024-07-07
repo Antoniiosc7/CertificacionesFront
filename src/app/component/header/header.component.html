@@ -20,9 +20,11 @@
       <li *ngIf="authService.isLoggedIn()">
         <a routerLink="/examenes" routerLinkActive="active">Exámenes</a>
       </li>
+      <!--
       <li *ngIf="authService.isLoggedIn()">
         <a routerLink="/videos" routerLinkActive="active">Videos</a>
       </li>
+      -->
       <li *ngIf="!authService.isLoggedIn(); else userProfile">
         <a routerLink="/login" routerLinkActive="active">Login/Register</a>
       </li>

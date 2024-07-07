@@ -40,7 +40,6 @@ export class AuthService {
         localStorage.setItem('accessToken', response.accessToken);
         localStorage.setItem('tokenType', response.tokenType);
         localStorage.setItem('username', credentials.username);
-        console.log('Inicio de sesión exitoso');
       }),
       catchError(error => {
         console.error('Error durante el inicio de sesión', error);
@@ -58,7 +57,6 @@ export class AuthService {
 
     return this.http.post<string>(this.registerUrl, user, httpOptions).pipe(
       tap(() => {
-        console.log('Registro exitoso');
       }),
       catchError(error => {
         console.error('Error durante el registro', error);
@@ -69,7 +67,6 @@ export class AuthService {
 
   getUsername(): string | null {
     return localStorage.getItem('username');
-    console.log('Nombre de usuario:', localStorage.getItem('username'));
   }
 
   logout(): void {
@@ -106,7 +103,7 @@ export class AuthService {
   }
 
   getUserProfile(username: string): Observable<any> {
-    return this.http.get(`http://localhost:8080/api/users/profile/${username}`,this.getHttpOptions());
+    return this.http.get(`${API_URL}/api/users/profile/${username}`,this.getHttpOptions());
   }
 
   private getHttpOptions() {
