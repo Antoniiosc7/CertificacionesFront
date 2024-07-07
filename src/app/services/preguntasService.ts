@@ -1,23 +1,18 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Pregunta } from '../models/pregunta.model';
-import {API_URL} from "../../config";
+import { API_URL } from "../../config";
 
 @Injectable({
   providedIn: 'root'
 })
 export class PreguntasService {
-  // Ajusta la ruta al lugar correcto donde se encuentra el archivo JSON en tu proyecto
-  private jsonUrl = 'assets/test.json';
-
   constructor(private http: HttpClient) { }
 
-  obtenerPreguntas(): Observable<any> {
+  obtenerPreguntas(examenId: string): Observable<Pregunta[]> {
     const httpOptions = this.getHttpOptions();
-
-    // Utiliza HttpClient para obtener el contenido del archivo JSON
-    return this.http.get<any>(`${API_URL}/api/examenes/respuesta`, httpOptions);
+    return this.http.get<Pregunta[]>(`${API_URL}/api/pregunta/${examenId}/preguntas`, httpOptions);
   }
 
   private getHttpOptions() {

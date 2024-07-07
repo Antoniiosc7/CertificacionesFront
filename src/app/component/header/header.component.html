@@ -18,14 +18,17 @@
       <li><a routerLink="/" routerLinkActive="active">Inicio</a></li>
       <li *ngIf="authService.isLoggedIn()"><a routerLink="/documentacion" routerLinkActive="active">Documentacion</a></li>
       <li *ngIf="authService.isLoggedIn()">
-        <a routerLink="/examen" routerLinkActive="active">Examen</a>
+        <a routerLink="/examenes" routerLinkActive="active">Exámenes</a>
+      </li>
+      <li *ngIf="authService.isLoggedIn()">
+        <a routerLink="/videos" routerLinkActive="active">Videos</a>
       </li>
       <li *ngIf="!authService.isLoggedIn(); else userProfile">
         <a routerLink="/login" routerLinkActive="active">Login/Register</a>
       </li>
       <ng-template #userProfile>
         <li>
-          <a [routerLink]="['/user', authService.getUsername()]" routerLinkActive="active">{{ authService.getUsername() }}</a>
+          <a [routerLink]="['/user']" routerLinkActive="active">{{ authService.getUsername() }}</a>
         </li>
 
       </ng-template>

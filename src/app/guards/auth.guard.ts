@@ -8,7 +8,7 @@ import {AuthService} from "../services/authService";
 })
 export class AuthGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
-
+/*
   canActivate(): Observable<boolean> {
     return this.authService.isAdmin().pipe(
       map(isAdmin => {
@@ -19,4 +19,17 @@ export class AuthGuard implements CanActivate {
       })
     );
   }
+*/
+  canActivate(): Observable<boolean> {
+    return this.authService.checkTokenValidity().pipe(
+      map(isValid => {
+        if (!isValid) {
+          this.router.navigate(['login']); // Cambia '' a 'login' o a la ruta que prefieras para el inicio de sesión
+        }
+        return isValid;
+      })
+    );
+  }
+
+
 }

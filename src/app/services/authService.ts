@@ -104,4 +104,17 @@ export class AuthService {
       })
     );
   }
+
+  getUserProfile(username: string): Observable<any> {
+    return this.http.get(`http://localhost:8080/api/users/profile/${username}`,this.getHttpOptions());
+  }
+
+  private getHttpOptions() {
+    return {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
+      })
+    };
+  }
 }
