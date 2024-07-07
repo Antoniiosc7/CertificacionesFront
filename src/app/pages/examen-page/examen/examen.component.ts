@@ -102,7 +102,7 @@ export class ExamenComponent implements OnInit {
     this.preguntas.forEach(pregunta => {
       const respuestaCorrecta = pregunta.respuestasCorrectas;
       const respuestaUsuario = this.respuestasUsuario[pregunta.id];
-      if (respuestaCorrecta.includes(respuestaUsuario[0])) {
+      if (respuestaUsuario && respuestaUsuario.length > 0 && respuestaCorrecta.includes(respuestaUsuario[0])) {
         this.puntuacion += 1;
       }
     });
