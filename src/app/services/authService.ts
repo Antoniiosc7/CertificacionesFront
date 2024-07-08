@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
 import {catchError, Observable, of, tap, throwError} from 'rxjs';
 import {API_URL} from "../../config";
 import {Router} from "@angular/router";
+import {RegisterData} from "../models/registerData.model";
 
 @Injectable({
   providedIn: 'root'
@@ -49,7 +50,8 @@ export class AuthService {
   }
   private registerUrl = `${API_URL}/api/auth/register`;
 
-  register(user: {username: string, password: string}): Observable<any> {
+  // In AuthService
+  register(user: RegisterData): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
       responseType: 'text' as 'json'
@@ -91,6 +93,7 @@ export class AuthService {
       })
     );
   }
+  /*
   private adminUrl = `${API_URL}/api/auth/is_admin`;
   isAdmin(): Observable<boolean> {
     const headers = { 'Authorization': 'Bearer ' + this.getToken() };
@@ -101,6 +104,7 @@ export class AuthService {
       })
     );
   }
+  */
 
   getUserProfile(username: string): Observable<any> {
     return this.http.get(`${API_URL}/api/users/profile/${username}`,this.getHttpOptions());

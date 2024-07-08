@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from "../../../services/authService";
-import { Router } from "@angular/router";
+import {Router, RouterLink, RouterLinkActive} from "@angular/router";
 import { FormsModule } from "@angular/forms";
 import { CommonModule } from "@angular/common";
 
@@ -9,7 +9,9 @@ import { CommonModule } from "@angular/common";
   standalone: true,
   imports: [
     FormsModule,
-    CommonModule
+    CommonModule,
+    RouterLink,
+    RouterLinkActive
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'

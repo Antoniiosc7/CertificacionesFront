@@ -1,16 +1,19 @@
 .container {
-  max-width: 600px; /* Ajusta este valor según necesites */
-  margin: auto; /* Asegura el centrado horizontal */
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  background: #ffffff; /* Fondo blanco para el formulario */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  border-radius: 10px; /* Bordes redondeados para el contenedor */
+  background-image: linear-gradient(to right top, #ffffff, #f8f9fa);
 }
 
 @media (min-width: 768px) {
   .col-md-8 {
-    flex: 0 0 66.666667%; /* Ajusta el ancho en pantallas medianas */
-    max-width: 66.666667%; /* Ajusta el ancho en pantallas medianas */
+    flex: 0 0 66.666667%;
+    max-width: 66.666667%;
   }
 }
-
-/* Asegúrate de que el resto de tu CSS no esté interfiriendo con el centrado */
 
 html, body {
   height: 100%;
@@ -20,25 +23,20 @@ html, body {
   align-items: center;
   background-color: #f5f5f5; /* Fondo más claro para la página */
 }
+
 .vertical-center {
   display: flex;
   flex-direction: column;
   justify-content: center; /* Centra los elementos verticalmente */
 }
-.container {
-  max-width: 600px;
-  margin: auto;
-  padding: 20px;
-  background: #ffffff; /* Fondo blanco para el formulario */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
-  border-radius: 10px; /* Bordes redondeados para el contenedor */
-}
+
 .form-control {
   width: 100%; /* Hace que los inputs ocupen todo el ancho disponible */
   border-radius: 5px; /* Bordes redondeados para los inputs */
   border: 1px solid #ced4da;
   padding: .375rem .75rem;
 }
+
 .custom-alert {
   background-color: #f8d7da; /* Rojo clarito */
   padding: 10px;
@@ -56,16 +54,11 @@ html, body {
   color: #721c24;
   font-size: 20px;
   cursor: pointer;
-  margin-top: 10px
-}
-.form-group {
-  margin-bottom: 1rem;
+  margin-top: 10px;
 }
 
-.form-control {
-  border-radius: 5px; /* Bordes redondeados para los inputs */
-  border: 1px solid #ced4da;
-  padding: .375rem .75rem;
+.form-group {
+  margin-bottom: 1rem;
 }
 
 .btn-primary, .btn-secondary {
@@ -90,8 +83,26 @@ html, body {
 .btn-secondary:hover {
   background-color: #545b62;
 }
+/* Alinea el botón de registro a la derecha */
+.form-submit {
+  display: flex;
+  justify-content: flex-end; /* Alinea el contenido (el botón) a la derecha */
+  width: 100%; /* Asegura que el contenedor ocupe el ancho completo */
+}
 
-/* Añade un gradiente al fondo del contenedor para un efecto más moderno */
-.container {
-  background-image: linear-gradient(to right top, #ffffff, #f8f9fa);
+.mr-auto {
+  margin-right: auto;
+}
+
+/* Asegura que el contenedor del formulario ocupe el ancho completo */
+form, .container {
+  width: 100%;
+}
+
+/* Asegura que el div que contiene el texto y el botón también ocupe el ancho completo */
+.d-flex {
+  width: 100%;
+}
+#label {
+  margin-right: 20px;
 }

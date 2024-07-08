@@ -20,10 +20,12 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.checkTokenValidity().subscribe();
-
+/*
     this.authService.isAdmin().subscribe(isAdmin => {
       this.isAdmin = isAdmin;
     });
+
+ */
   }
 
 
