@@ -9,8 +9,30 @@
     <img src="{{ user.profileImg }}" alt="Imagen de perfil">
   </div>
 </div>
+<form (ngSubmit)="applyFilters($event)">
+  <div class="filter-container">
+    <mat-form-field appearance="fill">
+      <mat-label>Capítulo del Examen</mat-label>
+      <input matInput #chapterInput (input)="applyFilter(chapterInput.value)" placeholder="Filtrar por Capítulo">
+    </mat-form-field>
 
-<div *ngIf="resultadosConDetalles.length > 0">
+    <mat-form-field appearance="fill">
+      <mat-label>Fecha de Inicio</mat-label>
+      <input matInput [matDatepicker]="picker1" placeholder="Selecciona una fecha" (dateChange)="applyDateFilter($event.value, 'start')" (focus)="openDatePicker1()">
+      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Fecha Fin</mat-label>
+      <input matInput [matDatepicker]="picker2" placeholder="Selecciona una fecha" (dateChange)="applyDateFilter($event.value, 'end')" (focus)="openDatePicker2()">
+      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
+    </mat-form-field>
+  </div>
+  <button type="submit">Aplicar Filtros</button>
+</form>
+<div *ngIf="resultadosConDetalles.data.length > 0">
   <h3>Últimos Resultados de Exámenes</h3>
   <table mat-table [dataSource]="resultadosConDetalles" class="mat-elevation-z8">
 
@@ -41,5 +63,7 @@
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
   </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 </div>

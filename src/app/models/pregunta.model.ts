@@ -8,6 +8,10 @@ export class Pregunta {
   opcion4?: string;
   opcion5?: string;
   opcion6?: string;
+  opcion7?: string;
+  opcion8?: string;
+  opcion9?: string;
+  opcion10?: string;
   respuestasCorrectas: string[];
   explicacion: string;
   examen: {

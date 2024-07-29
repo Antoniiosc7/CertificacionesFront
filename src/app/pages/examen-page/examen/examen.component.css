@@ -1,14 +1,15 @@
-.correcta {
-  color: green;
-  background-color: lightgreen;
+/* src/app/pages/examen-page/examen/examen.component.css */
 
+.correcta {
+  color: black!important;
+  background-color: lightgreen;
 }
 
 .incorrecta {
-  color: red;
+  color: black!important;
   background-color: lightcoral;
-
 }
+
 pre {
   background-color: #f5f5f5;
   border: 1px solid #ccc;
@@ -98,6 +99,7 @@ p.puntuacion {
   color: #007bff;
   margin-top: 20px;
 }
+
 input[type="radio"].correcta {
   background-color: lightgreen;
 }

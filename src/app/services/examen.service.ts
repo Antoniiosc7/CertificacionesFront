@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Examen } from '../models/examen.model';
-import {API_URL} from "../../config"; // Ajusta la ruta según donde coloques el modelo
+import {API_URL} from "../../config";
 
 @Injectable({
   providedIn: 'root'

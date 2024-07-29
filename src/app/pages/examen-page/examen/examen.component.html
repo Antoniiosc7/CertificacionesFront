@@ -1,3 +1,5 @@
+<!-- src/app/pages/examen-page/examen/examen.component.html -->
+
 <!-- Mostrar tiempo restante -->
 <div class="timer">
   Tiempo restante: {{ formatTime(timeLeft) }}
@@ -6,18 +8,22 @@
   <hr>
   <p>{{ preguntaIndex + 1 }}. {{ pregunta.pregunta }}</p>
   <pre *ngIf="pregunta.codigo">{{ pregunta.codigo }}</pre>
-  <div *ngFor="let opcion of pregunta.opciones; let opcionIndex = index" class="opcion-container">
+  <div *ngFor="let opcion of getFilteredOpciones(pregunta); let opcionIndex = index" class="opcion-container">
     <input type="checkbox" [id]="'opcion' + preguntaIndex + '-' + opcionIndex" [name]="'pregunta' + pregunta.id"
-           [ngClass]="{'correcta': mostrarResultados && pregunta.respuestasCorrectas.includes(getOpcionLetra(opcionIndex)), 'incorrecta': mostrarResultados && !pregunta.respuestasCorrectas.includes(getOpcionLetra(opcionIndex))}"
            (change)="seleccionarRespuesta(pregunta.id, getOpcionLetra(opcionIndex), $event)"
            [disabled]="mostrarResultados">
-    <label [for]="'opcion' + preguntaIndex + '-' + opcionIndex">{{ getOpcionLetra(opcionIndex) }}. {{ opcion }}</label>
+    <label [for]="'opcion' + preguntaIndex + '-' + opcionIndex"
+           [ngClass]="{
+             'correcta': mostrarResultados && pregunta.respuestasCorrectas.includes(getOpcionLetra(opcionIndex)),
+             'incorrecta': mostrarResultados && !pregunta.respuestasCorrectas.includes(getOpcionLetra(opcionIndex)) && respuestasUsuario[pregunta.id] && respuestasUsuario[pregunta.id].includes(getOpcionLetra(opcionIndex))
+           }">{{ getOpcionLetra(opcionIndex) }}. {{ opcion }}</label>
   </div>
-  <div *ngIf="mostrarResultados" [ngClass]="{'correcto': esRespuestaCorrecta(pregunta), 'incorrecto': !esRespuestaCorrecta(pregunta)}">
+  <div *ngIf="mostrarResultados">
     <p>Respuesta correcta: {{ pregunta.respuestasCorrectas.join(', ') }}</p>
     <p>Explicación: {{ pregunta.explicacion }}</p>
   </div>
 </div>
+
 <button (click)="finalizarCuestionario()" [disabled]="mostrarResultados">Finalizar</button>
 <div *ngIf="mostrarResultados">
   <p>Tu puntuación es: {{ puntuacion }}</p>
