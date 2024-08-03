@@ -46,15 +46,5 @@ export const routes: Routes = [
     path: 'videos',
     component: VideosComponent,
     canActivate: [AuthGuard]
-  },
-  {
-    path: 'istqb',
-    loadChildren: () => import('istqb-lib').then(m => m.IstqbLibModule),
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'java',
-    loadChildren: () => import('java-lib').then(m => m.JavaLibModule),
-    canActivate: [AuthGuard]
   }
 ];
