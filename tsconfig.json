@@ -5,7 +5,7 @@
   "compilerOptions": {
     "paths": {
       "@ng-doc/generated": [
-        "./ng-doc/Certificaciones/index.ts"
+        "./ng-doc-propio/index.ts"
       ],
       "@ng-doc/generated/*": [
         "./ng-doc/Certificaciones/*"

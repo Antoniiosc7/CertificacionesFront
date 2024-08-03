@@ -3,12 +3,11 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import {HeaderComponent} from "./component/header/header.component";
 import {FooterComponent} from "./component/footer/footer.component";
-import {DocsComponent} from "./component/docs/docs.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [HeaderComponent, FooterComponent, DocsComponent, RouterOutlet, NgDocNavbarComponent, NgDocRootComponent, NgDocSidebarComponent],
+  imports: [HeaderComponent, FooterComponent, RouterOutlet, NgDocNavbarComponent, NgDocRootComponent, NgDocSidebarComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

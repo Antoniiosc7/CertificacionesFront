@@ -81,6 +81,9 @@
               "buildTarget": "Certificaciones:build:production"
             },
             "development": {
+              "ngDoc": {
+                "config": "./ng-doc-propio/ng-doc.config.ts"
+              },
               "buildTarget": "Certificaciones:build:development"
             }
           },

@@ -1,7 +1,53 @@
-.content-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
+h1, p, h3, ol {
+  text-align: center; /* Centra el texto */
+  margin: 20px auto; /* Añade márgenes para espaciar los elementos */
+  max-width: 800px; /* Limita el ancho máximo para mejor legibilidad */
+}
+
+p, h3, ol {
+  text-align: justify; /* Justifica el texto */
+}
+
+p {
+  line-height: 1.6; /* Mejora la legibilidad del párrafo */
+}
+
+h1 {
+  font-size: 32px; /* Ajusta el tamaño de la fuente del título */
+  color: #333; /* Color de texto más oscuro para el título */
+  margin-bottom: 40px; /* Añade más espacio debajo del título */
+  line-height: 1.2; /* Añade espacio entre las líneas del título */
+
+}
+
+h3 {
+  font-size: 24px; /* Ajusta el tamaño de la fuente del encabezado */
+  color: #4CAF50; /* Color de acento */
+  margin-top: 40px; /* Añade más espacio encima del encabezado */
+}
+
+h1 + h1, h3 + h3 {
+  margin-top: 60px; /* Añade más espacio entre títulos consecutivos */
+}
+
+ol {
+  padding-left: 0; /* Remueve el padding por defecto */
+  list-style-position: inside; /* Coloca los números dentro del contenedor */
+}
+
+ol li {
+  margin: 10px 0; /* Añade espacio entre los elementos de la lista */
+}
+
+ul {
+  text-align: left; /* Alinea el texto de las listas no ordenadas a la izquierda */
+  margin: 10px 0 10px 20px; /* Añade márgenes para espaciar los elementos */
+}
+
+ul li {
+  margin: 5px 0; /* Añade espacio entre los elementos de la lista */
+}
+
+strong {
+  color: #333; /* Color de texto más oscuro para los títulos */
 }
