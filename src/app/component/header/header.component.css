@@ -17,6 +17,7 @@ nav ul {
 
 nav ul li {
   margin: 10px 20px; /* Espaciado uniforme */
+  position: relative; /* Necesario para el posicionamiento del menú desplegable */
 }
 
 nav ul li a {
@@ -38,6 +39,31 @@ nav ul li a img {
 
 nav ul li a:hover img {
   transform: scale(1.1); /* Aumenta ligeramente el tamaño al pasar el mouse */
+}
+
+nav ul li .dropdown-menu {
+  display: none; /* Oculta el menú desplegable por defecto */
+  position: absolute;
+  top: 100%; /* Posiciona el menú desplegable debajo del elemento principal */
+  left: 0;
+  background-color: #333; /* Mismo color de fondo que el header */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+nav ul li:hover .dropdown-menu {
+  display: block; /* Muestra el menú desplegable al pasar el mouse */
+}
+
+nav ul li .dropdown-menu li {
+  width: 200px;
+}
+
+nav ul li .dropdown-menu li a {
+  padding: 10px;
+  display: block;
+  white-space: nowrap;
+  color: #fff; /* Color de texto claro */
 }
 
 button {

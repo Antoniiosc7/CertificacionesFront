@@ -1,0 +1,14 @@
+<ng-doc-navbar [leftContent]="leftContent">
+  <ng-template #leftContent>
+    <h3 class="brand" style="margin: 0">Buscar documentación</h3>
+  </ng-template>
+</ng-doc-navbar>
+<a [routerLink]="['/docs/java']" class="card">
+  <h2>Documentación Certificación Java</h2>
+  <p>Encuentra toda la documentación necesaria para prepararte para la certificación en Java.</p>
+</a>
+
+<a [routerLink]="['/docs/istqb']" class="card">
+  <h2>Documentación Examen ISTQB</h2>
+  <p>Accede a los recursos y guías para el examen de certificación ISTQB.</p>
+</a>

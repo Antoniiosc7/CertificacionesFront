@@ -1,0 +1,29 @@
+.card {
+  display: block; /* Ensure the card is a block element */
+  border: 1px solid #ddd; /* Borde de la tarjeta */
+  border-radius: 8px; /* Bordes redondeados */
+  padding: 20px; /* Espaciado interno */
+  margin: 20px auto; /* Espaciado externo */
+  max-width: 600px; /* Ancho máximo */
+  text-align: center; /* Centrar el texto */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
+  text-decoration: none; /* Remove underline from links */
+  color: inherit; /* Inherit text color */
+  transition: transform 0.2s; /* Smooth transform transition */
+}
+
+.card:hover {
+  transform: scale(1.05); /* Slightly enlarge the card on hover */
+}
+
+.card h2 {
+  font-size: 24px; /* Tamaño de la fuente del título */
+  color: #333; /* Color del texto del título */
+  margin-bottom: 10px; /* Espacio debajo del título */
+}
+
+.card p {
+  font-size: 16px; /* Tamaño de la fuente del párrafo */
+  color: #666; /* Color del texto del párrafo */
+  line-height: 1.5; /* Altura de línea */
+}
