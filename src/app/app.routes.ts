@@ -52,6 +52,7 @@ export const routes: Routes = [
     component: VideosComponent,
     canActivate: [AuthGuard]
   },
+
   {
     path: 'docs/java',
     component: JavaComponent,

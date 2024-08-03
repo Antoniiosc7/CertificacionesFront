@@ -15,6 +15,14 @@ export class ApiService {
     return this.http.get(`${this.baseUrl}/certificaciones`, this.getHttpOptions());
   }
 
+  getDocsByCert(certId: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/certificaciones/${certId}/docs`, this.getHttpOptions());
+  }
+
+  getMenuByCert(certId: string | null): Observable<any> {
+    return this.http.get(`${this.baseUrl}/certificaciones/${certId}/menu`, this.getHttpOptions());
+  }
+
   private getHttpOptions() {
     return {
       headers: new HttpHeaders({
