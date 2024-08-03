@@ -3,12 +3,19 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
     "paths": {
       "@ng-doc/generated": [
         "./ng-doc/Certificaciones/index.ts"
       ],
       "@ng-doc/generated/*": [
         "./ng-doc/Certificaciones/*"
+      ],
+      "istqb-lib": [
+        "./dist/istqb-lib"
+      ],
+      "java-lib": [
+        "./dist/java-lib"
       ]
     },
     "outDir": "./dist/out-tsc",
