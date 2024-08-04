@@ -2,8 +2,15 @@
   <button (click)="goBack()" class="btn-back">Volver</button>
 </div>
 
-<div *ngFor="let item of menuItems" class="card">
-  <a [routerLink]="item.route">
-    <h2>{{ item.nombreMenu }}</h2>
-  </a>
+<div class="card-container">
+  <div *ngFor="let item of menuItems" class="card">
+    <a [routerLink]="item.route">
+      <div class="card-content">
+        <img [src]="item.imgUrl" alt="{{ item.nombreMenu }}" class="card-img">
+        <div class="card-text">
+          <h2>{{ item.nombreMenu }}</h2>
+        </div>
+      </div>
+    </a>
+  </div>
 </div>

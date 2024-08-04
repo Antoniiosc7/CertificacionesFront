@@ -1,6 +1,9 @@
-<div *ngFor="let item of menuItems" class="card">
-  <a [routerLink]="item.route">
-    <h2>{{ item.title }}</h2>
-    <p>{{ item.description }}</p>
-  </a>
+<div class="card-container">
+  <div *ngFor="let item of menuItems" class="card">
+    <a [routerLink]="item.route">
+      <img [src]="item.imgUrl" alt="{{ item.title }}" class="card-img">
+      <h2>{{ item.title }}</h2>
+      <p>{{ item.description }}</p>
+    </a>
+  </div>
 </div>
