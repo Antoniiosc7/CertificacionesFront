@@ -15,7 +15,7 @@ import {RouterLink} from "@angular/router";
   styleUrl: './priv-home.component.css'
 })
 export class PrivHomeComponent implements OnInit  {
-  menuItems: { route: string, title: string, description: string }[] = [];
+  menuItems: { route: string, title: string, description: string, imgUrl: string}[] = [];
 
   constructor(private apiService: ApiService) { }
 
@@ -24,7 +24,8 @@ export class PrivHomeComponent implements OnInit  {
       this.menuItems = data.map((cert: any) => ({
         route: `/certificacion/${cert.codCertificacion}`,
         title: cert.nombre,
-        description: cert.descripcion
+        description: cert.descripcion,
+        imgUrl: cert.imgUrl
       }));
     });
   }

@@ -7,8 +7,14 @@
   </ng-template>
 </ng-doc-navbar>
 
-<div *ngFor="let item of menuItems" class="card">
-  <a [routerLink]="item.route">
-    <h2>{{ item.nombre }}</h2>
-  </a>
+<div class="card-container">
+  <div *ngFor="let item of menuItems" class="card">
+    <a [routerLink]="item.route">
+      <div class="card-content">
+        <div class="card-text">
+          <h2>{{ item.nombre }}</h2>
+        </div>
+      </div>
+    </a>
+  </div>
 </div>

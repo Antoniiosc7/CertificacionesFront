@@ -18,7 +18,7 @@ import {Location} from '@angular/common'; // Import Location service
 })
 export class CertificacionComponent implements OnInit {
   certificacionId: string | null;
-  menuItems: { route: string, nombreMenu: string }[] = [];
+  menuItems: { route: string, nombreMenu: string, imgUrl: string }[] = [];
   constructor(
     private apiService: ApiService,
     private route: ActivatedRoute,
@@ -31,7 +31,8 @@ export class CertificacionComponent implements OnInit {
     this.apiService.getMenuByCert(this.certificacionId).subscribe(data => {
       this.menuItems = data.map((cert: any) => ({
         route: `/certificacion/${this.certificacionId}/${cert.codMenu}`,
-        nombreMenu: cert.nombreMenu
+        nombreMenu: cert.nombreMenu,
+        imgUrl: cert.imgUrl
       }));
     });
   }
