@@ -1,23 +1,40 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import {RouterLink, RouterOutlet, Routes} from '@angular/router';
-import {NgDocNavbarComponent, NgDocRootComponent, NgDocSidebarComponent} from "@ng-doc/app";
-import {NavigationComponent} from "../../component/navigation/navigation.component";
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ActivatedRoute, RouterLink, RouterOutlet } from '@angular/router';
+import { NgDocNavbarComponent, NgDocRootComponent, NgDocSidebarComponent } from '@ng-doc/app';
+import { NavigationComponent } from '../../component/navigation/navigation.component';
+import { ApiService } from '../../services/api.service';
+import { NgForOf } from '@angular/common';
 
 @Component({
   selector: 'ng-doc-docs',
-  templateUrl: `docs.component.html`,
-  styleUrls: ['./docs.component.css',
-    './docs.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  templateUrl: 'docs.component.html',
+  styleUrl: './docs.component.scss',
+  changeDetection: ChangeDetectionStrategy.Default, // Changed to Default
   imports: [
     RouterOutlet,
     NgDocSidebarComponent,
     NgDocNavbarComponent,
     NgDocRootComponent,
     NavigationComponent,
-    RouterLink
+    RouterLink,
+    NgForOf
   ],
   standalone: true
 })
-export class DocsComponent {}
+export class DocsComponent implements OnInit {
+  menuItems: { route: string, nombre: string, description: string }[] = [];
+  certificacionId: string | null;
 
+  constructor(private apiService: ApiService, private route: ActivatedRoute) {
+    this.certificacionId = this.route.snapshot.paramMap.get('id');
+  }
+
+  ngOnInit(): void {
+    this.apiService.getDocsByCert(this.certificacionId).subscribe(data => {
+      this.menuItems = data.map((cert: any) => ({
+        route: `/certificacion/${this.certificacionId}/docs/${cert.url}`,
+        nombre: cert.nombre
+      }));
+    });
+  }
+}

@@ -3,6 +3,6 @@
     <h5 class="card-title">{{ examen.nombre }}</h5>
     <h6 class="card-subtitle mb-2 text-muted">{{ examen.chapter }}</h6>
     <p class="card-text">{{ examen.descripcion }}</p>
-    <a [routerLink]="['/examenes/examen', examen.examenId]" class="btn-examen">Hacer Examen</a>
+    <a [routerLink]="['/certificacion', courseId, 'examen', examen.examenId]" class="btn-examen">Hacer Examen</a>
   </div>
 </div>

@@ -23,8 +23,6 @@ export class CertificacionComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.certificacionId);
-
     this.apiService.getMenuByCert(this.certificacionId).subscribe(data => {
       this.menuItems = data.map((cert: any) => ({
         route: `/certificacion/${this.certificacionId}/${cert.codMenu}`,

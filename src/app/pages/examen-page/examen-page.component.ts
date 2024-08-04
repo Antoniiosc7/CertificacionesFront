@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Examen} from "../../models/examen.model";
 import {ExamenService} from "../../services/examen.service";
 import {NgForOf} from "@angular/common";
-import {RouterLink} from "@angular/router";
+import {ActivatedRoute, RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-examen-page',
@@ -16,8 +16,11 @@ import {RouterLink} from "@angular/router";
 })
 export class ExamenPageComponent implements OnInit {
   examenes: Examen[] = [];
+  courseId: string | null;
 
-  constructor(private examenService: ExamenService) { }
+  constructor(private examenService: ExamenService, private route: ActivatedRoute) {
+    this.courseId = this.route.snapshot.paramMap.get('course');
+  }
 
   ngOnInit(): void {
     this.examenService.getAllExamenes().subscribe(data => {
