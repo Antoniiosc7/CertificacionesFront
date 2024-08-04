@@ -15,8 +15,8 @@ export class ApiService {
     return this.http.get(`${this.baseUrl}/certificaciones`, this.getHttpOptions());
   }
 
-  getDocsByCert(certId: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/certificaciones/${certId}/docs`, this.getHttpOptions());
+  getDocsByCert(certId: string | null): Observable<any> {
+    return this.http.get(`${this.baseUrl}/certificaciones/${certId}/documentacion`, this.getHttpOptions());
   }
 
   getMenuByCert(certId: string | null): Observable<any> {

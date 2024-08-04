@@ -29,12 +29,12 @@ export const routes: Routes = [
     component: LoginComponent
   },
   {
-    path: 'examenes/:course',
+    path: 'certificacion/:course/examenes',
     component: ExamenPageComponent,
     canActivate: [AuthGuard]
   },
   {
-    path: 'examenes/:course/examen/:id',
+    path: 'certificacion/:course/examen/:id',
     component: ExamenComponent,
     canActivate: [AuthGuard]
   },
@@ -71,6 +71,11 @@ export const routes: Routes = [
   {
     path: 'certificacion/:id',
     component: CertificacionComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'certificacion/:id/docs',
+    component: DocsComponent,
     canActivate: [AuthGuard]
   }
 ];

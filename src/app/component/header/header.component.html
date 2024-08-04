@@ -9,6 +9,7 @@
           <a [routerLink]="['/home']" routerLinkActive="active">Inicio</a>
         </li>
       </ng-template>
+      <!--
       <li *ngIf="authService.isLoggedIn()" class="dropdown">
         <a [routerLink]="['/docs']" routerLinkActive="active" class="dropdown-toggle">Documentacion</a>
         <ul class="dropdown-menu">
@@ -23,6 +24,8 @@
           <li><a routerLink="/examenes/istqb" routerLinkActive="active">ISTQB</a></li>
         </ul>
       </li>
+
+      -->
       <li *ngIf="!authService.isLoggedIn(); else userProfile">
         <a routerLink="/login" routerLinkActive="active">Login/Register</a>
       </li>
