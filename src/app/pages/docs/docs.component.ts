@@ -4,6 +4,7 @@ import { NgDocNavbarComponent, NgDocRootComponent, NgDocSidebarComponent } from 
 import { NavigationComponent } from '../../component/navigation/navigation.component';
 import { ApiService } from '../../services/api.service';
 import { NgForOf } from '@angular/common';
+import {Location} from '@angular/common'; // Import Location service
 
 @Component({
   selector: 'ng-doc-docs',
@@ -25,7 +26,11 @@ export class DocsComponent implements OnInit {
   menuItems: { route: string, nombre: string, description: string }[] = [];
   certificacionId: string | null;
 
-  constructor(private apiService: ApiService, private route: ActivatedRoute) {
+  constructor(
+    private apiService: ApiService,
+    private route: ActivatedRoute,
+    private location: Location
+) {
     this.certificacionId = this.route.snapshot.paramMap.get('id');
   }
 
@@ -36,5 +41,9 @@ export class DocsComponent implements OnInit {
         nombre: cert.nombre
       }));
     });
+  }
+
+  goBack(): void {
+    this.location.back(); // Use back method of Location service
   }
 }

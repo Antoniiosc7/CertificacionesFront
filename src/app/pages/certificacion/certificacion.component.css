@@ -27,3 +27,24 @@
   color: #666; /* Color del texto del párrafo */
   line-height: 1.5; /* Altura de línea */
 }
+
+.header {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.btn-back {
+  background-color: white; /* Set background to white */
+  color: #007bff; /* Set text color to blue */
+  border: 2px solid #007bff; /* Set border color to blue */
+  padding: 15px 30px; /* Increase padding for larger button */
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 18px; /* Increase font size */
+  margin-top: 10px;
+}
+
+.btn-back:hover {
+  background-color: #e6f0ff; /* Light blue background on hover */
+}
