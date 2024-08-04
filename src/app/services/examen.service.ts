@@ -17,6 +17,11 @@ export class ExamenService {
     return this.http.get<Examen[]>(this.baseUrl, this.getHttpOptions());
   }
 
+  getExamenByCertId(certId: string | null): Observable<Examen[]> { // Adjusted return type to Observable<Examen[]>
+    const url = `${this.baseUrl}/${certId}`;
+    return this.http.get<Examen[]>(url, this.getHttpOptions());
+  }
+
   private getHttpOptions() {
     return {
       headers: new HttpHeaders({

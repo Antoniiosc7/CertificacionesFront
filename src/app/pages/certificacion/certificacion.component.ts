@@ -3,6 +3,7 @@ import {ExamenService} from "../../services/examen.service";
 import {ApiService} from "../../services/api.service";
 import {ActivatedRoute, RouterLink} from "@angular/router";
 import {CommonModule, NgForOf} from "@angular/common";
+import {Location} from '@angular/common'; // Import Location service
 
 @Component({
   selector: 'app-certificacion',
@@ -18,7 +19,11 @@ import {CommonModule, NgForOf} from "@angular/common";
 export class CertificacionComponent implements OnInit {
   certificacionId: string | null;
   menuItems: { route: string, nombreMenu: string }[] = [];
-  constructor(private apiService: ApiService, private route: ActivatedRoute) {
+  constructor(
+    private apiService: ApiService,
+    private route: ActivatedRoute,
+    private location: Location)
+  {
     this.certificacionId = this.route.snapshot.paramMap.get('id');
   }
 
@@ -29,6 +34,10 @@ export class CertificacionComponent implements OnInit {
         nombreMenu: cert.nombreMenu
       }));
     });
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 
 }
