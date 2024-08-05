@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('tokenType', response.tokenType);
         this.message = 'Inicio de sesión exitoso';
         this.messageType = 'success';
-        this.router.navigate(['/']).then(() => {
+        this.router.navigate(['/home']).then(() => {
           window.location.reload();
         });
         this.isSubmitting = false; // Restablece el estado de envío

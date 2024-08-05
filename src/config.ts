@@ -7,3 +7,8 @@ export const PROTOCOLO = 'http';
 
 export const API_URL = `${PROTOCOLO}://${BASE_URL}:${API_PORT}`;
 export const wsURL = `ws://${BASE_URL}:${API_PORT}/wss`;
+
+// ROUTINGS
+
+export const JAVA_DOCS = 'certificacion/javaCert/docs';
+export const ISTQB_DOCS = 'certificacion/istqbCert/docs';
