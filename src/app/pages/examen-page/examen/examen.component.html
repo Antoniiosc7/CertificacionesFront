@@ -1,11 +1,15 @@
 <!-- src/app/pages/examen-page/examen/examen.component.html -->
 
-<!-- Mostrar tiempo restante -->
+<!-- Mostrar tiempo restante
 <div class="timer">
   Tiempo restante: {{ formatTime(timeLeft) }}
 </div>
-<div *ngFor="let pregunta of preguntas; let preguntaIndex = index">
-  <hr>
+-->
+<br>
+<div *ngFor="let pregunta of preguntas; let preguntaIndex = index"
+     [ngClass]="{'card-correcta': mostrarResultados && esRespuestaCorrecta(pregunta), 'card-incorrecta': mostrarResultados && !esRespuestaCorrecta(pregunta)}"
+     class="pregunta-container">
+
   <p>{{ preguntaIndex + 1 }}. {{ pregunta.pregunta }}</p>
   <pre *ngIf="pregunta.codigo">{{ pregunta.codigo }}</pre>
   <div *ngFor="let opcion of getFilteredOpciones(pregunta); let opcionIndex = index" class="opcion-container">

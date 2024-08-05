@@ -27,11 +27,12 @@ div.pregunta-container {
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 5px;
+  font-size: 20px; /* Increase font size */
 }
 
 /* Estilo para las preguntas */
 p {
-  font-size: 18px;
+  font-size: 22px; /* Increase font size */
   color: #333;
 }
 
@@ -44,6 +45,7 @@ pre {
   white-space: pre-wrap;
   overflow-x: auto;
   margin-top: 5px;
+  font-size: 18px; /* Increase font size */
 }
 
 /* Estilo para las opciones de respuesta */
@@ -56,7 +58,7 @@ input[type="checkbox"] {
 }
 
 label {
-  font-size: 16px;
+  font-size: 20px; /* Increase font size */
   color: #666;
 }
 
@@ -68,7 +70,7 @@ button {
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 18px; /* Increase font size */
 }
 
 button:hover {
@@ -94,7 +96,7 @@ p.explicacion {
 }
 
 p.puntuacion {
-  font-size: 20px;
+  font-size: 24px; /* Increase font size */
   font-weight: bold;
   color: #007bff;
   margin-top: 20px;
@@ -106,4 +108,13 @@ input[type="radio"].correcta {
 
 input[type="radio"].incorrecta {
   background-color: lightcoral;
+}
+
+/* Estilos para las tarjetas de preguntas */
+.card-correcta {
+  background-color: #d4edda;
+}
+
+.card-incorrecta {
+  background-color: #f8d7da;
 }

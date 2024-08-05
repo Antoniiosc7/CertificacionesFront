@@ -8,11 +8,10 @@ import {ProfileComponent} from "./pages/profile/profile.component";
 import {VideosComponent} from "./pages/videos/videos.component";
 import {RegisterComponent} from "./pages/auth/register/register.component";
 import {DocsComponent} from "./pages/docs/docs.component";
-import {JavaComponent} from "./pages/docs/java/java.component";
-import {IstqbComponent} from "./pages/docs/istqb/istqb.component";
 import {PrivHomeComponent} from "./pages/priv-home/priv-home.component";
 import {AdminComponent} from "./pages/admin/admin.component";
 import {CertificacionComponent} from "./pages/certificacion/certificacion.component";
+import {AuthGuardWithRedirect} from "./guards/auth-guard-with-redirect.guard";
 
 export const routes: Routes = [
   {
@@ -52,22 +51,12 @@ export const routes: Routes = [
     component: VideosComponent,
     canActivate: [AuthGuard]
   },
-
-  {
-    path: 'docs/java',
-    component: JavaComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'docs/istqb',
-    component: IstqbComponent,
-    canActivate: [AuthGuard]
-  },
   {
     path: 'admin',
     component: AdminComponent,
     canActivate: [AuthGuard]
   },
+
   {
     path: 'certificacion/:id',
     component: CertificacionComponent,

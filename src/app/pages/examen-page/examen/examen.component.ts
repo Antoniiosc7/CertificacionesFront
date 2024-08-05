@@ -95,19 +95,11 @@ export class ExamenComponent implements OnInit {
       respuestasCorrectas.every((respuesta: any) => respuestasUsuario.includes(respuesta));
   }
 
-  formatTime(time: number): string {
-    const minutes: number = Math.floor(time / 60);
-    const seconds: number = time - minutes * 60;
-    return `${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-  }
-
   finalizarCuestionario(): void {
     this.mostrarResultados = true;
     this.puntuacion = 0;
     this.preguntas.forEach(pregunta => {
-      const respuestaCorrecta = pregunta.respuestasCorrectas;
-      const respuestaUsuario = this.respuestasUsuario[pregunta.id];
-      if (respuestaUsuario && respuestaUsuario.length > 0 && respuestaCorrecta.includes(respuestaUsuario[0])) {
+      if (this.esRespuestaCorrecta(pregunta)) {
         this.puntuacion += 1;
       }
     });

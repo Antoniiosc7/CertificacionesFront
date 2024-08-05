@@ -1,6 +1,7 @@
 // @ts-nocheck
 import {Provider} from '@angular/core';
 import {NG_DOC_CONTEXT} from '@ng-doc/app/tokens';
+import {ISTQB_DOCS, JAVA_DOCS} from '../src/config';
 
 export function provideNgDocContext(): Provider {
     return {
@@ -10,116 +11,134 @@ export function provideNgDocContext(): Provider {
 
                 {
                     title: `Chapter 01 - Building Blocks`,
-                    route: '/docs/java/chapter-1---building-blocks',
+                    route: `${JAVA_DOCS}/chapter-1---building-blocks`,
                     hidden: false,
                 },
 
                 {
                     title: `Chapter 02 - Operators`,
-                    route: '/docs/java/chapter-2---operators',
+                    route: `${JAVA_DOCS}/chapter-2---operators`,
                     hidden: false,
                 },
 
                 {
                     title: `Chapter 03 - Making Decisions`,
-                    route: '/docs/java/chapter-3---making-decisions',
+                    route: `${JAVA_DOCS}/chapter-3---making-decisions`,
                     hidden: false,
                 },
 
                 {
                     title: `Chapter 04 - Core APIs`,
-                    route: '/docs/java/chapter-4---core-apis',
+                    route: `${JAVA_DOCS}/chapter-4---core-apis`,
                     hidden: false,
                 },
 
                 {
                     title: `Chapter 05 - Methods`,
-                    route: '/docs/java/chapter-5---methods',
+                    route: `${JAVA_DOCS}/chapter-5---methods`,
                     hidden: false,
                 },
 
                 {
                     title: `Chapter 06 - Glass Design`,
-                    route: '/docs/java/chapter-6---glass-design',
+                    route: `${JAVA_DOCS}/chapter-6---glass-design`,
                     hidden: false,
                 },
 
                 {
                     title: `Chapter 07 - Beyond Classes`,
-                    route: '/docs/java/chapter-7---beyond-classes',
+                    route: `${JAVA_DOCS}/chapter-7---beyond-classes`,
                     hidden: false,
                 },
 
                 {
                     title: `Chapter 08 - Lambdas and Functional Interfaces`,
-                    route: '/docs/java/chapter-8---lambdas-and-functional-interfaces',
+                    route: `${JAVA_DOCS}/chapter-8---lambdas-and-functional-interfaces`,
                     hidden: false,
                 },
 
                 {
                     title: `Chapter 09 - Collections and Generics`,
-                    route: '/docs/java/chapter-9---collections-and-generics',
+                    route: `${JAVA_DOCS}/chapter-9---collections-and-generics`,
                     hidden: false,
                 },
 
                 {
                     title: `Chapter 10 - Streams`,
-                    route: '/docs/java/chapter-10---streams',
+                    route: `${JAVA_DOCS}/chapter-10---streams`,
                     hidden: false,
                 },
 
                 {
                     title: `Chapter 11 - Exceptions and Localizations`,
-                    route: '/docs/java/chapter-11---exceptions-and-localizations',
+                    route: '/certificacion/javaCert/docs/chapter-11---exceptions-and-localizations',
                     hidden: false,
                 },
 
                 {
                     title: `Chapter 12 - Modules`,
-                    route: '/docs/java/chapter-12---modules',
+                    route: `${JAVA_DOCS}/chapter-12---modules`,
                     hidden: false,
                 },
 
                 {
                     title: `Chapter 13 - Concurrency`,
-                    route: '/docs/java/chapter-13---concurrency',
+                    route: `${JAVA_DOCS}/chapter-13---concurrency`,
                     hidden: false,
                 },
 
                 {
                     title: `Chapter 14 - I-O`,
-                    route: '/docs/java/chapter-14---i-o',
+                    route: `${JAVA_DOCS}/chapter-14---i-o`,
                     hidden: false,
                 },
 
                 {
                     title: `Chapter 15 - JDBC`,
-                    route: '/docs/java/chapter-15---jdbc',
+                    route: `${JAVA_DOCS}/chapter-15---jdbc`,
                     hidden: false,
                 },
 
-                {
-                    title: `Installation`,
-                    route: '/docs/istqb/installation',
-                    hidden: false,
-                },
-
-                {
-                    title: `saber mas`,
-                    route: '/docs/istqb/saber-mas',
-                    hidden: false,
-                },
-
-                {
-                    title: `TFG`,
-                    route: '/docs/istqb/tfg',
-                    hidden: false,
-                },
               {
-                title: `I-Desarrollo-de-Software-Agil`,
-                route: '/docs/istqb/I-Desarrollo-de-Software-Agil',
+                title: `ISTQB-Capitulo-I`,
+                route: `${ISTQB_DOCS}/istqb-capitulo-i`,
                 hidden: false,
-              }
+              },
+
+              {
+                title: `ISTQB-Capitulo-II`,
+                route: `${ISTQB_DOCS}/istqb-capitulo-ii`,
+                hidden: false,
+              },
+
+              {
+                title: `ISTQB-Capitulo-III`,
+                route: `${ISTQB_DOCS}/istqb-capitulo-iii`,
+                hidden: false,
+              },
+
+              {
+                title: `ISTQB-Capitulo-IV`,
+                route: `${ISTQB_DOCS}/istqb-capitulo-iv`,
+                hidden: false,
+              },
+
+              {
+                title: `ISTQB-Capitulo-V`,
+                route: `${ISTQB_DOCS}/istqb-capitulo-v`,
+                hidden: false,
+              },
+              {
+                title: `ISTQB-Capitulo-VI`,
+                route: `${ISTQB_DOCS}/istqb-capitulo-vi`,
+                hidden: false,
+              },
+              {
+                title: `ISTQB-Capitulo-Anexo`,
+                route: `${ISTQB_DOCS}/istqb-capitulo-anexo`,
+                hidden: false,
+              },
+
             ],
         }
     };
