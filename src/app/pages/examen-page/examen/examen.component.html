@@ -11,7 +11,17 @@
      class="pregunta-container">
 
   <p>{{ preguntaIndex + 1 }}. {{ pregunta.pregunta }}</p>
-  <pre *ngIf="pregunta.codigo">{{ pregunta.codigo }}</pre>
+  <div *ngIf="pregunta.codigo && pregunta.codigo.startsWith('tabla =')">
+    <table>
+      <tr *ngFor="let row of parseTableData(pregunta.codigo)">
+        <td *ngFor="let cell of row">{{ cell }}</td>
+      </tr>
+    </table>
+  </div>
+  <div *ngIf="pregunta.codigo && pregunta.codigo.startsWith('img =')">
+    <img [src]="pregunta.codigo.replace('img =', '').trim()" alt="Imagen de la pregunta">
+  </div>
+  <pre *ngIf="pregunta.codigo && !pregunta.codigo.startsWith('tabla =') && !pregunta.codigo.startsWith('img =')">{{ pregunta.codigo }}</pre>
   <div *ngFor="let opcion of getFilteredOpciones(pregunta); let opcionIndex = index" class="opcion-container">
     <input type="checkbox" [id]="'opcion' + preguntaIndex + '-' + opcionIndex" [name]="'pregunta' + pregunta.id"
            (change)="seleccionarRespuesta(pregunta.id, getOpcionLetra(opcionIndex), $event)"

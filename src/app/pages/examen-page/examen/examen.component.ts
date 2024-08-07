@@ -125,4 +125,11 @@ export class ExamenComponent implements OnInit {
       }
     });
   }
+
+  parseTableData(codigo: string): string[][] {
+    const tableString = codigo.replace('tabla =', '').trim();
+    // Remove the outer curly braces and split by '], [' to get each row
+    const rows = tableString.slice(2, -2).split('], [');
+    return rows.map(row => row.split(',').map(cell => cell.trim() === 'null' ? '' : cell.trim()));
+  }
 }
