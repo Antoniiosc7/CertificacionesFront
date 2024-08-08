@@ -4,13 +4,13 @@ import { NgDocNavbarComponent, NgDocRootComponent, NgDocSidebarComponent } from 
 import { NavigationComponent } from '../../component/navigation/navigation.component';
 import { ApiService } from '../../services/api.service';
 import { NgForOf } from '@angular/common';
-import {Location} from '@angular/common'; // Import Location service
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'ng-doc-docs',
   templateUrl: 'docs.component.html',
   styleUrl: './docs.component.scss',
-  changeDetection: ChangeDetectionStrategy.Default, // Changed to Default
+  changeDetection: ChangeDetectionStrategy.Default,
   imports: [
     RouterOutlet,
     NgDocSidebarComponent,
@@ -44,6 +44,6 @@ export class DocsComponent implements OnInit {
   }
 
   goBack(): void {
-    this.location.back(); // Use back method of Location service
+    this.location.back();
   }
 }

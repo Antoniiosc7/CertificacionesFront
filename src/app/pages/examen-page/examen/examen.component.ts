@@ -1,5 +1,3 @@
-// src/app/pages/examen-page/examen/examen.component.ts
-
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import { Pregunta } from "../../../models/pregunta.model";
 import { PreguntasService } from "../../../services/preguntasService";
@@ -36,7 +34,7 @@ export class ExamenComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.fechaDeInicio = new Date(); // Establece la fecha de inicio cuando el componente se carga
+    this.fechaDeInicio = new Date();
     this.examenNombre = sessionStorage.getItem('examenNombre');
     const examenId = this.route.snapshot.paramMap.get('id');
     if (examenId) {
@@ -70,10 +68,8 @@ export class ExamenComponent implements OnInit, OnDestroy {
       this.respuestasUsuario[preguntaId] = [];
     }
     if (isChecked) {
-      // Agregar la opción seleccionada si el checkbox está marcado
       this.respuestasUsuario[preguntaId].push(opcionLetra);
     } else {
-      // Quitar la opción seleccionada si el checkbox está desmarcado
       const index = this.respuestasUsuario[preguntaId].indexOf(opcionLetra);
       if (index > -1) {
         this.respuestasUsuario[preguntaId].splice(index, 1);
@@ -117,7 +113,7 @@ export class ExamenComponent implements OnInit, OnDestroy {
       userId: userId,
       examenId: examenId,
       resultado: this.puntuacion,
-      fechaDeInicio: this.fechaDeInicio, // Usa la fecha de inicio establecida en ngOnInit
+      fechaDeInicio: this.fechaDeInicio,
       fechaFin: new Date()
     };
 
@@ -132,21 +128,16 @@ export class ExamenComponent implements OnInit, OnDestroy {
 
   parseTableData(codigo: string): string[][] {
     const tableString = codigo.replace('tabla =', '').trim();
-    // Remove the outer curly braces and split by '], [' to get each row
     const rows = tableString.slice(2, -2).split('], [');
     return rows.map(row => row.split(',').map(cell => cell.trim() === 'null' ? '' : cell.trim()));
   }
 
   parseImageUrl(codigo: string): SafeUrl {
-    // Remove 'img =' and surrounding quotes
     const url = codigo.replace('img =', '').trim().replace(/^"|"$/g, '');
     return this.sanitizer.bypassSecurityTrustUrl(url);
   }
 
-  // src/app/pages/examen-page/examen/examen.component.ts
-
   processPreguntaText(text: string): string {
-    // Replace \r\n with <br>
     return text.replace(/\r\n/g, '<br>');
   }
   ngOnDestroy(): void {

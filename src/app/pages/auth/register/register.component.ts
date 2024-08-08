@@ -45,8 +45,6 @@ export class RegisterComponent {
           this.router.navigate(['/login']);
         },
         error => {
-          // Assuming the server might return a JSON object with a 'message' field
-          // or a plain text response
           const errorMessage = error.error.message || error.error || 'Error durante el registro';
           this.message = errorMessage;
           this.messageType = 'danger';

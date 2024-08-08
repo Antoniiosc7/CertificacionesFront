@@ -45,27 +45,27 @@
 }
 
 .btn-back {
-  background-color: white; /* Set background to white */
-  color: #007bff; /* Set text color to blue */
-  border: 2px solid #007bff; /* Set border color to blue */
-  padding: 15px 30px; /* Increase padding for larger button */
+  background-color: white;
+  color: #007bff;
+  border: 2px solid #007bff;
+  padding: 15px 30px;
   cursor: pointer;
   border-radius: 5px;
-  font-size: 18px; /* Increase font size */
+  font-size: 18px;
   margin-top: 10px;
 }
 
 .btn-back:hover {
-  background-color: #e6f0ff; /* Light blue background on hover */
+  background-color: #e6f0ff;
 }
 
 .card-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px; /* Adjust the gap between cards as needed */
+  gap: 20px;
 }
 
 .card {
-  flex: 1 1 calc(33.333% - 20px); /* Adjust the percentage to control the number of cards per row */
+  flex: 1 1 calc(33.333% - 20px);
   box-sizing: border-box;
 }

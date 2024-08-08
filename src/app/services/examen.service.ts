@@ -9,7 +9,7 @@ import {API_URL} from "../../config";
 })
 export class ExamenService {
 
-  private baseUrl = `${API_URL}/api/examenes`; // Ajusta según tu configuración
+  private baseUrl = `${API_URL}/api/examenes`;
 
   constructor(private http: HttpClient) { }
 
@@ -17,7 +17,7 @@ export class ExamenService {
     return this.http.get<Examen[]>(this.baseUrl, this.getHttpOptions());
   }
 
-  getExamenByCertId(certId: string | null): Observable<Examen[]> { // Adjusted return type to Observable<Examen[]>
+  getExamenByCertId(certId: string | null): Observable<Examen[]> {
     const url = `${this.baseUrl}/${certId}`;
     return this.http.get<Examen[]>(url, this.getHttpOptions());
   }

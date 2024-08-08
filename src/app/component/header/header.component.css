@@ -1,8 +1,8 @@
 header {
-  background-color: #333; /* Color de fondo más oscuro para un look moderno */
+  background-color: #333;
   padding: 20px 0;
   text-align: center;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Sombra para dar profundidad */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
 nav ul {
@@ -12,47 +12,47 @@ nav ul {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap; /* Permite que los elementos se ajusten en pantallas pequeñas */
+  flex-wrap: wrap;
 }
 
 nav ul li {
-  margin: 10px 20px; /* Espaciado uniforme */
-  position: relative; /* Necesario para el posicionamiento del menú desplegable */
+  margin: 10px 20px;
+  position: relative;
 }
 
 nav ul li a {
-  color: #fff; /* Color de texto claro */
+  color: #fff;
   text-decoration: none;
-  font-weight: 500; /* Peso de fuente menos bold */
-  font-size: 18px; /* Tamaño de fuente ajustado */
-  transition: color 0.3s ease; /* Transición suave al cambiar de color */
+  font-weight: 500;
+  font-size: 18px;
+  transition: color 0.3s ease;
 }
 
 nav ul li a:hover, .active {
-  color: #4CAF50; /* Color de acento al pasar el mouse y para el activo */
-  text-decoration: none; /* Remueve el subrayado al pasar el mouse */
+  color: #4CAF50;
+  text-decoration: none;
 }
 
 nav ul li a img {
-  transition: transform 0.3s ease; /* Transición suave para la transformación */
+  transition: transform 0.3s ease;
 }
 
 nav ul li a:hover img {
-  transform: scale(1.1); /* Aumenta ligeramente el tamaño al pasar el mouse */
+  transform: scale(1.1);
 }
 
 nav ul li .dropdown-menu {
-  display: none; /* Oculta el menú desplegable por defecto */
+  display: none;
   position: absolute;
-  top: 100%; /* Posiciona el menú desplegable debajo del elemento principal */
+  top: 100%;
   left: 0;
-  background-color: #333; /* Mismo color de fondo que el header */
+  background-color: #333;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   z-index: 1000;
 }
 
 nav ul li:hover .dropdown-menu {
-  display: block; /* Muestra el menú desplegable al pasar el mouse */
+  display: block;
 }
 
 nav ul li .dropdown-menu li {
@@ -63,19 +63,19 @@ nav ul li .dropdown-menu li a {
   padding: 10px;
   display: block;
   white-space: nowrap;
-  color: #fff; /* Color de texto claro */
+  color: #fff;
 }
 
 button {
-  background-color: #4CAF50; /* Color de fondo para el botón */
-  color: white; /* Color de texto para el botón */
+  background-color: #4CAF50;
+  color: white;
   border: none;
   padding: 10px 20px;
-  border-radius: 5px; /* Bordes redondeados */
-  cursor: pointer; /* Cambia el cursor a pointer */
-  transition: background-color 0.3s ease; /* Transición suave del color de fondo */
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 button:hover {
-  background-color: #45a049; /* Oscurece el botón al pasar el mouse */
+  background-color: #45a049;
 }

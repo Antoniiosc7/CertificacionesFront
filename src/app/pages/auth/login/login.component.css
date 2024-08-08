@@ -2,9 +2,9 @@
   max-width: 600px;
   margin: auto;
   padding: 20px;
-  background: #ffffff; /* Fondo blanco para el formulario */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
-  border-radius: 10px; /* Bordes redondeados para el contenedor */
+  background: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
   background-image: linear-gradient(to right top, #ffffff, #f8f9fa);
 }
 
@@ -21,28 +21,28 @@ html, body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f5f5f5; /* Fondo más claro para la página */
+  background-color: #f5f5f5;
 }
 
 .vertical-center {
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Centra los elementos verticalmente */
+  justify-content: center;
 }
 
 .form-control {
-  width: 100%; /* Hace que los inputs ocupen todo el ancho disponible */
-  border-radius: 5px; /* Bordes redondeados para los inputs */
+  width: 100%;
+  border-radius: 5px;
   border: 1px solid #ced4da;
   padding: .375rem .75rem;
 }
 
 .custom-alert {
-  background-color: #f8d7da; /* Rojo clarito */
+  background-color: #f8d7da;
   padding: 10px;
-  color: #721c24; /* Color de texto que contrasta con el fondo */
-  position: relative; /* Para posicionar absolutamente el botón de cierre */
-  padding-right: 35px; /* Espacio para el botón de cierre */
+  color: #721c24;
+  position: relative;
+  padding-right: 35px;
 }
 
 .close-btn {
@@ -62,7 +62,7 @@ html, body {
 }
 
 .btn-primary, .btn-secondary {
-  border-radius: 5px; /* Bordes redondeados para los botones */
+  border-radius: 5px;
   padding: .375rem .75rem;
   color: #fff;
   border: none;
@@ -83,23 +83,21 @@ html, body {
 .btn-secondary:hover {
   background-color: #545b62;
 }
-/* Alinea el botón de registro a la derecha */
+
 .form-submit {
   display: flex;
-  justify-content: flex-end; /* Alinea el contenido (el botón) a la derecha */
-  width: 100%; /* Asegura que el contenedor ocupe el ancho completo */
+  justify-content: flex-end;
+  width: 100%;
 }
 
 .mr-auto {
   margin-right: auto;
 }
 
-/* Asegura que el contenedor del formulario ocupe el ancho completo */
 form, .container {
   width: 100%;
 }
 
-/* Asegura que el div que contiene el texto y el botón también ocupe el ancho completo */
 .d-flex {
   width: 100%;
 }

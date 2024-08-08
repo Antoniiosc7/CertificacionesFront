@@ -2,8 +2,8 @@ import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/c
 import { AuthService } from "../../services/authService";
 import { ActivatedRoute } from "@angular/router";
 import {DatePipe, NgForOf, NgIf} from "@angular/common";
-import { ResultadoService } from "../../services/resultadoService"; // Adjust the path as needed
-import { ExamenService } from "../../services/examen.service"; // Adjust the path as needed
+import { ResultadoService } from "../../services/resultadoService";
+import { ExamenService } from "../../services/examen.service";
 import {combineLatest, Subscription} from 'rxjs';
 import { map } from 'rxjs/operators';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
@@ -99,7 +99,6 @@ export class ProfileComponent implements OnInit, AfterViewInit, OnDestroy {
       })
     ).subscribe(resultadosConDetalles => {
       this.resultadosConDetalles.data = resultadosConDetalles;
-      // Asegúrate de que esta línea se ejecute después de que los datos se hayan cargado y asignado
       this.resultadosConDetalles.paginator = this.paginator;
     });
   }
@@ -116,22 +115,19 @@ export class ProfileComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   applyFilter(filterValue: string) {
-    filterValue = filterValue.trim().toLowerCase(); // Normalize filter value
+    filterValue = filterValue.trim().toLowerCase();
     if (!filterValue) {
-      // If no filter value, reload original data
       this.loadUserExamResults(Number(localStorage.getItem('idUser')));
     } else {
-      // Filter the resultadosConDetalles data
       const filteredData = this.resultadosConDetalles.data.filter(item =>
         item.capituloExamen.toLowerCase().includes(filterValue)
       );
-      this.resultadosConDetalles.data = filteredData; // Update the table's data source
+      this.resultadosConDetalles.data = filteredData;
     }
   }
 
   applyFilters($event: any) {
     this.applyFilter(this.filterChapter);
-    // Asume que applyDateFilter ya maneja ambos filtros de fecha
     this.applyDateFilter(this.startDateFilter, 'start');
     this.applyDateFilter(this.endDateFilter, 'end');
   }
