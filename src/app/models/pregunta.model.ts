@@ -20,7 +20,7 @@ export class Pregunta {
     nombre: string;
     descripcion: string;
   };
-  opciones?: string[]; // Add this line
+  opciones?: string[];
 
   constructor() {
     this.id = 0;
@@ -33,6 +33,6 @@ export class Pregunta {
       nombre: '',
       descripcion: ''
     };
-    this.opciones = []; // Initialize the opciones array
+    this.opciones = [];
   }
 }

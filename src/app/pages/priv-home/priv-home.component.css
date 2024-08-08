@@ -5,42 +5,42 @@
 }
 
 .card {
-  display: block; /* Ensure the card is a block element */
-  border: 1px solid #ddd; /* Borde de la tarjeta */
-  border-radius: 8px; /* Bordes redondeados */
-  padding: 20px; /* Espaciado interno */
-  margin: 20px; /* Espaciado externo */
-  max-width: 45%; /* Ancho máximo */
-  text-align: center; /* Centrar el texto */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
-  text-decoration: none; /* Remove underline from links */
-  color: inherit; /* Inherit text color */
-  transition: transform 0.2s; /* Smooth transform transition */
+  display: block;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px;
+  max-width: 45%;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s;
 }
 
 .card:hover {
-  transform: scale(1.05); /* Slightly enlarge the card on hover */
+  transform: scale(1.05);
 }
 
 .card a {
-  text-decoration: none; /* Remove underline from links */
-  color: inherit; /* Inherit text color */
+  text-decoration: none;
+  color: inherit;
 }
 
 .card-img {
-  width: 100%; /* Full width */
-  height: auto; /* Maintain aspect ratio */
-  border-radius: 8px 8px 0 0; /* Rounded top corners */
+  width: 100%;
+  height: auto;
+  border-radius: 8px 8px 0 0;
 }
 
 .card h2 {
-  font-size: 24px; /* Tamaño de la fuente del título */
-  color: #333; /* Color del texto del título */
-  margin-bottom: 10px; /* Espacio debajo del título */
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 10px;
 }
 
 .card p {
-  font-size: 16px; /* Tamaño de la fuente del párrafo */
-  color: #666; /* Color del texto del párrafo */
-  line-height: 1.5; /* Altura de línea */
+  font-size: 16px;
+  color: #666;
+  line-height: 1.5;
 }

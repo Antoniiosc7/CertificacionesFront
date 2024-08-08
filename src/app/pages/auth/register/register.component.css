@@ -77,7 +77,7 @@ button{
 
 .form-control {
   width: 100%;
-  box-sizing: border-box; /* Asegura que el padding y border no expandan el elemento más allá del 100% */
+  box-sizing: border-box;
 }
 .text-success {
   color: green;

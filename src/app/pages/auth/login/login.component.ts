@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   username!: string;
   password!: string;
   message!: string | null;  messageType!: string;
-  isSubmitting: boolean = false; // Nueva variable para controlar el estado de envío
+  isSubmitting: boolean = false;
 
   constructor(private authService: AuthService, private router: Router) { }
 
@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin(): void {
-    this.isSubmitting = true; // Indica que el inicio de sesión ha comenzado
+    this.isSubmitting = true;
     this.authService.login({username: this.username, password: this.password}).subscribe(
       response => {
         localStorage.setItem('idUser', response.idUser);
@@ -39,12 +39,12 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/home']).then(() => {
           window.location.reload();
         });
-        this.isSubmitting = false; // Restablece el estado de envío
+        this.isSubmitting = false;
       },
       error => {
         this.message = 'Error durante el inicio de sesión';
         this.messageType = 'danger';
-        this.isSubmitting = false; // Restablece el estado de envío incluso en caso de error
+        this.isSubmitting = false;
       }
     );
   }

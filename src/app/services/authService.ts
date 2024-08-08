@@ -50,7 +50,6 @@ export class AuthService {
   }
   private registerUrl = `${API_URL}/api/auth/register`;
 
-  // In AuthService
   register(user: RegisterData): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),

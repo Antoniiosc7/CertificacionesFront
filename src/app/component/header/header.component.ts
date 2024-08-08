@@ -18,7 +18,7 @@ import {MiniHeaderComponent} from "../mini-header/mini-header.component";
 export class HeaderComponent implements OnInit {
   showNavbar: boolean = false;
   tokenValido: boolean = false;
-  constructor(public authService: AuthService, private location: Location, private router: Router) { } // Inyecta el servicio de sesión
+  constructor(public authService: AuthService, private location: Location, private router: Router) { }
   isAdmin = false;
 
 

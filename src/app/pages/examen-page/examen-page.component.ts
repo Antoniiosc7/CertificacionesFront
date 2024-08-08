@@ -3,7 +3,7 @@ import {Examen} from "../../models/examen.model";
 import {ExamenService} from "../../services/examen.service";
 import {NgForOf} from "@angular/common";
 import {ActivatedRoute, RouterLink} from "@angular/router";
-import {Location} from '@angular/common'; // Import Location service
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-examen-page',

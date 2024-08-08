@@ -3,7 +3,7 @@ import {ExamenService} from "../../services/examen.service";
 import {ApiService} from "../../services/api.service";
 import {ActivatedRoute, RouterLink} from "@angular/router";
 import {CommonModule, NgForOf} from "@angular/common";
-import {Location} from '@angular/common'; // Import Location service
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-certificacion',
