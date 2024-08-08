@@ -138,3 +138,8 @@ th, td {
 th {
   background-color: #f2f2f2;
 }
+
+.end button, .end.end2 p {
+  margin-bottom: 30px !important;
+}
+

@@ -1,11 +1,12 @@
 // src/app/pages/examen-page/examen/examen.component.ts
 
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import { Pregunta } from "../../../models/pregunta.model";
 import { PreguntasService } from "../../../services/preguntasService";
 import { CommonModule, NgClass } from "@angular/common";
 import { ActivatedRoute } from "@angular/router";
 import { ResultadoService } from "../../../services/resultadoService";
+import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-examen',
@@ -17,7 +18,7 @@ import { ResultadoService } from "../../../services/resultadoService";
   templateUrl: './examen.component.html',
   styleUrls: ['./examen.component.css']
 })
-export class ExamenComponent implements OnInit {
+export class ExamenComponent implements OnInit, OnDestroy {
   preguntas: Pregunta[] = [];
   respuestasUsuario: { [key: number]: string[] } = {};
   mostrarResultados: boolean = false;
@@ -25,15 +26,18 @@ export class ExamenComponent implements OnInit {
   timeLeft: number = 1800;
   interval!: ReturnType<typeof setInterval>;
   fechaDeInicio!: Date;
+  examenNombre: string | null = '';
 
   constructor(
     private preguntasService: PreguntasService,
     private resultadoService: ResultadoService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private sanitizer: DomSanitizer
   ) { }
 
   ngOnInit(): void {
     this.fechaDeInicio = new Date(); // Establece la fecha de inicio cuando el componente se carga
+    this.examenNombre = sessionStorage.getItem('examenNombre');
     const examenId = this.route.snapshot.paramMap.get('id');
     if (examenId) {
       this.preguntasService.obtenerPreguntas(examenId).subscribe(preguntas => {
@@ -131,5 +135,21 @@ export class ExamenComponent implements OnInit {
     // Remove the outer curly braces and split by '], [' to get each row
     const rows = tableString.slice(2, -2).split('], [');
     return rows.map(row => row.split(',').map(cell => cell.trim() === 'null' ? '' : cell.trim()));
+  }
+
+  parseImageUrl(codigo: string): SafeUrl {
+    // Remove 'img =' and surrounding quotes
+    const url = codigo.replace('img =', '').trim().replace(/^"|"$/g, '');
+    return this.sanitizer.bypassSecurityTrustUrl(url);
+  }
+
+  // src/app/pages/examen-page/examen/examen.component.ts
+
+  processPreguntaText(text: string): string {
+    // Replace \r\n with <br>
+    return text.replace(/\r\n/g, '<br>');
+  }
+  ngOnDestroy(): void {
+    sessionStorage.removeItem('examenNombre');
   }
 }

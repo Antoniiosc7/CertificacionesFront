@@ -42,4 +42,8 @@ export class ExamenPageComponent implements OnInit {
   goBack(): void {
     this.location.back();
   }
+
+  saveExamenNombre(nombre: string): void {
+    sessionStorage.setItem('examenNombre', nombre);
+  }
 }
