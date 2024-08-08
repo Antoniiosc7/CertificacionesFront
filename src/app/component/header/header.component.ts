@@ -6,11 +6,12 @@ import {CommonModule, Location} from "@angular/common";
 import {Router, RouterModule} from "@angular/router";
 import {NgDocNavbarComponent, NgDocRootComponent} from "@ng-doc/app";
 import {NavigationComponent} from "../navigation/navigation.component";
+import {MiniHeaderComponent} from "../mini-header/mini-header.component";
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterModule, CommonModule, NgDocNavbarComponent, NavigationComponent, NgDocRootComponent],
+  imports: [RouterModule, CommonModule, NgDocNavbarComponent, NavigationComponent, NgDocRootComponent, MiniHeaderComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
