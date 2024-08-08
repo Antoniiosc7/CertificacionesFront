@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-footer',
@@ -8,5 +9,9 @@ import { Component } from '@angular/core';
   styleUrl: './footer.component.css'
 })
 export class FooterComponent {
+  cookiePolicyUrl: SafeUrl;
 
+  constructor(private sanitizer: DomSanitizer) {
+    this.cookiePolicyUrl = this.sanitizer.bypassSecurityTrustUrl('https://antoniosaborido.es/cookie-policy');
+  }
 }
