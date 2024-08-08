@@ -23,7 +23,6 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.checkTokenValidity().subscribe();
-    console.log(this.isAccessTokenAbsent())
 /*
     this.authService.isAdmin().subscribe(isAdmin => {
       this.isAdmin = isAdmin;

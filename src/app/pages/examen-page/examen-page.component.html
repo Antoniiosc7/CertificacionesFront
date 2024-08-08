@@ -1,12 +1,16 @@
+<!-- src/app/pages/examen-page/examen-page.component.html -->
+
 <div class="header">
   <button (click)="goBack()" class="btn-back">Volver</button>
 </div>
 
-<div *ngFor="let examen of examenes" class="card">
-  <div class="card-body">
-    <h5 class="card-title">{{ examen.nombre }}</h5>
-    <h6 class="card-subtitle mb-2 text-muted">{{ examen.chapter }}</h6>
-    <p class="card-text">{{ examen.descripcion }}</p>
-    <a [routerLink]="['/certificacion', courseId, 'examen', examen.examenId]" class="btn-examen">Hacer Examen</a>
+<div class="card-container">
+  <div *ngFor="let examen of examenes" class="card">
+    <div class="card-body">
+      <h5 class="card-title">{{ examen.nombre }}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">{{ examen.chapter }}</h6>
+      <p class="card-text">{{ examen.descripcion }}</p>
+      <a [routerLink]="['/certificacion', courseId, 'examen', examen.examenId]" class="btn-examen" (click)="saveExamenNombre(examen.nombre)">Hacer Examen</a>
+    </div>
   </div>
 </div>
