@@ -1,40 +1,58 @@
 <div *ngIf="user" class="user-container">
   <div class="user-info">
     <h2>Perfil de Usuario</h2>
-    <p>Nombre: {{ user.nombre }}</p>
-    <p>Apellido: {{ user.apellido }}</p>
-    <p>Email: {{ user.mail }}</p>
+    <p><strong>Nombre:</strong> {{ user.nombre }}</p>
+    <p><strong>Apellido:</strong> {{ user.apellido }}</p>
+    <p><strong>Email:</strong> {{ user.mail }}</p>
   </div>
   <div class="user-image">
     <img src="{{ user.profileImg }}" alt="Imagen de perfil">
   </div>
 </div>
-<form (ngSubmit)="applyFilters($event)">
+
+<form (ngSubmit)="applyFilters($event)" class="filter-form">
   <div class="filter-container">
-    <mat-form-field appearance="fill">
+    <mat-form-field class="filter-field custom-form-field">
       <mat-label>Capítulo del Examen</mat-label>
-      <input matInput #chapterInput (input)="applyFilter(chapterInput.value)" placeholder="Filtrar por Capítulo">
+      <mat-select [(value)]="selectedChapter" (selectionChange)="applyFilter($event.value)" class="custom-select">
+        <mat-option *ngFor="let capitulo of capitulosDisponibles" [value]="capitulo">
+          {{ capitulo }}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
 
-    <mat-form-field appearance="fill">
+    <mat-form-field class="filter-field custom-form-field">
+      <mat-label>Nombre del Examen</mat-label>
+      <mat-select [(value)]="selectedExam" (selectionChange)="applyFilterByName($event.value)" class="custom-select">
+        <mat-option *ngFor="let examen of examenesDisponibles" [value]="examen">
+          {{ examen }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="filter-field custom-form-field">
       <mat-label>Fecha de Inicio</mat-label>
-      <input matInput [matDatepicker]="picker1" placeholder="Selecciona una fecha" (dateChange)="applyDateFilter($event.value, 'start')" (focus)="openDatePicker1()">
+      <input matInput [matDatepicker]="picker1" placeholder="Selecciona una fecha" (dateChange)="applyDateFilter($event.value, 'start')" (focus)="openDatePicker1()" class="custom-input">
       <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
       <mat-datepicker #picker1></mat-datepicker>
     </mat-form-field>
 
-    <mat-form-field appearance="fill">
+    <mat-form-field class="filter-field custom-form-field">
       <mat-label>Fecha Fin</mat-label>
-      <input matInput [matDatepicker]="picker2" placeholder="Selecciona una fecha" (dateChange)="applyDateFilter($event.value, 'end')" (focus)="openDatePicker2()">
+      <input matInput [matDatepicker]="picker2" placeholder="Selecciona una fecha" (dateChange)="applyDateFilter($event.value, 'end')" (focus)="openDatePicker2()" class="custom-input">
       <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
       <mat-datepicker #picker2></mat-datepicker>
     </mat-form-field>
   </div>
-  <button type="submit">Aplicar Filtros</button>
+  <div class="button-container">
+    <button mat-raised-button color="primary" type="submit" class="filter-button">Aplicar Filtros</button>
+    <button mat-raised-button color="warn" type="button" (click)="clearFilters()" class="clear-button">Limpiar Filtros</button>
+  </div>
 </form>
-<div *ngIf="resultadosConDetalles.data.length > 0">
+
+<div *ngIf="resultadosConDetalles.data.length > 0" class="result-container">
   <h3>Últimos Resultados de Exámenes</h3>
-  <table mat-table [dataSource]="resultadosConDetalles" class="mat-elevation-z8">
+  <table mat-table [dataSource]="resultadosConDetalles" class="mat-elevation-z8 custom-table">
 
     <ng-container matColumnDef="capituloExamen">
       <th mat-header-cell *matHeaderCellDef> Capítulo del Examen </th>
@@ -65,5 +83,5 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
   </table>
-  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons class="custom-paginator"></mat-paginator>
 </div>

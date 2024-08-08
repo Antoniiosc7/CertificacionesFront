@@ -1,3 +1,4 @@
+/* Import Angular Material theme */
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
 
-
-
+/* You can also use other prebuilt themes like deeppurple-amber.css, pink-bluegrey.css, or purple-green.css */
