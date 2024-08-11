@@ -1,0 +1,14 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Resultado del Examen</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p>Puntuación: {{ data.puntuacion }}</p>
+    <p>Tiempo: {{ data.tiempo }} segundos</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="verRespuestas()">Ver Respuestas</button>
+    <button mat-raised-button color="accent" (click)="irAlPerfil()">Ir al Perfil</button>
+    <button mat-raised-button color="warn" (click)="irAPaginaDeExamen()">Ir a Página de Examen</button>
+  </mat-card-actions>
+</mat-card>

@@ -41,7 +41,7 @@
   </div>
 </div>
 <div class="end">
-  <button (click)="finalizarCuestionario()" [disabled]="mostrarResultados">Finalizar</button>
+  <button *ngIf="!examenFinalizado" (click)="finalizarCuestionario()" [disabled]="mostrarResultados">Finalizar</button>
   <div *ngIf="mostrarResultados" class="end2">
     <p>Tu puntuación es: {{ puntuacion }}</p>
   </div>
