@@ -5,6 +5,8 @@ import { CommonModule, NgClass } from "@angular/common";
 import { ActivatedRoute } from "@angular/router";
 import { ResultadoService } from "../../../services/resultadoService";
 import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
+import {MatDialog} from "@angular/material/dialog";
+import {ExamenPopUpComponent} from "./examen-pop-up/examen-pop-up.component";
 
 @Component({
   selector: 'app-examen',
@@ -25,12 +27,14 @@ export class ExamenComponent implements OnInit, OnDestroy {
   interval!: ReturnType<typeof setInterval>;
   fechaDeInicio!: Date;
   examenNombre: string | null = '';
+  examenFinalizado: boolean = false;
 
   constructor(
     private preguntasService: PreguntasService,
     private resultadoService: ResultadoService,
     private route: ActivatedRoute,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -97,6 +101,7 @@ export class ExamenComponent implements OnInit, OnDestroy {
 
   finalizarCuestionario(): void {
     this.mostrarResultados = true;
+    this.examenFinalizado = true;
     this.puntuacion = 0;
     this.preguntas.forEach(pregunta => {
       if (this.esRespuestaCorrecta(pregunta)) {
@@ -119,6 +124,7 @@ export class ExamenComponent implements OnInit, OnDestroy {
 
     this.resultadoService.saveResultado(resultado).subscribe({
       next: (response) => {
+        this.openResultDialog();
       },
       error: (error) => {
         console.error('Error al guardar el resultado', error);
@@ -142,5 +148,16 @@ export class ExamenComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void {
     sessionStorage.removeItem('examenNombre');
+  }
+
+
+  openResultDialog(): void {
+    const tiempo = (new Date().getTime() - this.fechaDeInicio.getTime()) / 1000;
+    this.dialog.open(ExamenPopUpComponent, {
+      data: {
+        puntuacion: this.puntuacion,
+        tiempo: tiempo
+      }
+    });
   }
 }
