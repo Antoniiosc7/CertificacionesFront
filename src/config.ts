@@ -14,4 +14,4 @@ export const JAVA_DOCS = 'certificacion/javaCert/docs';
 export const ISTQB_DOCS = 'certificacion/istqbCert/docs';
 
 // Version
-export const VERSIONTEXT = "beta certs-project | v.0.0.2-3"
+export const VERSIONTEXT = "beta certs-project | v.0.0.2-4"
