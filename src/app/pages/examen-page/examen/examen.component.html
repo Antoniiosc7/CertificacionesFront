@@ -1,15 +1,8 @@
-<!-- src/app/pages/examen-page/examen/examen.component.html -->
-
-<!-- Mostrar tiempo restante
-<div class="timer">
-  Tiempo restante: {{ formatTime(timeLeft) }}
-</div>
--->
 <h1>{{ examenNombre }}</h1>
 
 <br>
 <div *ngFor="let pregunta of preguntas; let preguntaIndex = index"
-     [ngClass]="{'card-correcta': mostrarResultados && esRespuestaCorrecta(pregunta), 'card-incorrecta': mostrarResultados && !esRespuestaCorrecta(pregunta)}"
+     [ngClass]="{'card-correcta': mostrarResultados && esRespuestaCorrecta(pregunta.id), 'card-incorrecta': mostrarResultados && !esRespuestaCorrecta(pregunta.id)}"
      class="pregunta-container">
 
   <p [innerHTML]="preguntaIndex + 1 + '. ' + processPreguntaText(pregunta.pregunta)"></p>
@@ -30,14 +23,14 @@
            [disabled]="mostrarResultados">
     <label [for]="'opcion' + preguntaIndex + '-' + opcionIndex"
            [ngClass]="{
-             'correcta': mostrarResultados && pregunta.respuestasCorrectas.includes(getOpcionLetra(opcionIndex)),
-             'incorrecta': mostrarResultados && !pregunta.respuestasCorrectas.includes(getOpcionLetra(opcionIndex)) && respuestasUsuario[pregunta.id] && respuestasUsuario[pregunta.id].includes(getOpcionLetra(opcionIndex))
+             'correcta': mostrarResultados && respuestasCorrectas[pregunta.id].includes(getOpcionLetra(opcionIndex)),
+             'incorrecta': mostrarResultados && !respuestasCorrectas[pregunta.id].includes(getOpcionLetra(opcionIndex)) && respuestasUsuario[pregunta.id] && respuestasUsuario[pregunta.id].includes(getOpcionLetra(opcionIndex))
            }">{{ getOpcionLetra(opcionIndex) }}. {{ opcion }}</label>
   </div>
   <div *ngIf="mostrarResultados">
-    <p>Respuesta correcta: {{ pregunta.respuestasCorrectas.join(', ') }}</p>
+    <p *ngIf="respuestasCorrectas[pregunta.id]">Respuesta correcta: {{ respuestasCorrectas[pregunta.id].join(', ') }}</p>
     <hr>
-    <p [innerHTML]="'<strong>Explicación:</strong> ' + processPreguntaText(pregunta.explicacion)"></p>
+    <p *ngIf="explicaciones[pregunta.id]" [innerHTML]="'<strong>Explicación:</strong> ' + processPreguntaText(explicaciones[pregunta.id])"></p>
   </div>
 </div>
 <div class="end">

@@ -3,6 +3,7 @@ export class Examen {
     public examenId: number,
     public chapter: string,
     public nombre: string,
-    public descripcion?: string
+    public descripcion?: string,
+    public certificacion?: any
   ) {}
 }
