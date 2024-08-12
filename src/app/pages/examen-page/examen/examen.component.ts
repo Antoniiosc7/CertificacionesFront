@@ -1,12 +1,12 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import { Pregunta } from "../../../models/pregunta.model";
-import { PreguntasService } from "../../../services/preguntasService";
-import { CommonModule, NgClass } from "@angular/common";
-import { ActivatedRoute } from "@angular/router";
-import { ResultadoService } from "../../../services/resultadoService";
-import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
-import {MatDialog} from "@angular/material/dialog";
-import {ExamenPopUpComponent} from "./examen-pop-up/examen-pop-up.component";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { PreguntasService } from '../../../services/preguntasService';
+import { CommonModule, NgClass } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
+import { ResultadoService } from '../../../services/resultadoService';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { MatDialog } from '@angular/material/dialog';
+import { ExamenPopUpComponent } from './examen-pop-up/examen-pop-up.component';
+import { PreguntasDTO } from '../../../models/preguntasDTO.model';
 
 @Component({
   selector: 'app-examen',
@@ -19,8 +19,10 @@ import {ExamenPopUpComponent} from "./examen-pop-up/examen-pop-up.component";
   styleUrls: ['./examen.component.css']
 })
 export class ExamenComponent implements OnInit, OnDestroy {
-  preguntas: Pregunta[] = [];
+  preguntas: PreguntasDTO[] = [];
   respuestasUsuario: { [key: number]: string[] } = {};
+  respuestasCorrectas: { [key: number]: string[] } = {};
+  explicaciones: { [key: number]: string } = {};
   mostrarResultados: boolean = false;
   puntuacion: number = 0;
   timeLeft: number = 1800;
@@ -42,15 +44,21 @@ export class ExamenComponent implements OnInit, OnDestroy {
     this.examenNombre = sessionStorage.getItem('examenNombre');
     const examenId = this.route.snapshot.paramMap.get('id');
     if (examenId) {
-      this.preguntasService.obtenerPreguntas(examenId).subscribe(preguntas => {
-        this.preguntas = preguntas.map(pregunta => ({
+      this.preguntasService.obtenerPreguntas(examenId).subscribe(preguntasDTO => {
+        this.preguntas = preguntasDTO.map(pregunta => ({
           ...pregunta,
           opciones: [
             pregunta.opcion1, pregunta.opcion2, pregunta.opcion3, pregunta.opcion4, pregunta.opcion5,
             pregunta.opcion6, pregunta.opcion7, pregunta.opcion8, pregunta.opcion9, pregunta.opcion10
-          ].filter((opcion): opcion is string => opcion !== null && opcion?.trim() !== '') as string[],
-          respuestasCorrectas: typeof pregunta.respuestasCorrectas === 'string' ? JSON.parse(pregunta.respuestasCorrectas) : pregunta.respuestasCorrectas
+          ].filter((opcion): opcion is string => opcion !== null && opcion?.trim() !== '')
         }));
+      });
+
+      this.preguntasService.obtenerRespuestas(examenId).subscribe(respuestasDTO => {
+        respuestasDTO.forEach(respuesta => {
+          this.respuestasCorrectas[respuesta.id] = JSON.parse(respuesta.respuestasCorrectas);
+          this.explicaciones[respuesta.id] = respuesta.explicacion;
+        });
       });
     }
     this.startTimer();
@@ -91,9 +99,9 @@ export class ExamenComponent implements OnInit, OnDestroy {
     }, 1000);
   }
 
-  esRespuestaCorrecta(pregunta: any): boolean {
-    const respuestasUsuario = this.respuestasUsuario[pregunta.id] || [];
-    const respuestasCorrectas = pregunta.respuestasCorrectas;
+  esRespuestaCorrecta(preguntaId: number): boolean {
+    const respuestasUsuario = this.respuestasUsuario[preguntaId] || [];
+    const respuestasCorrectas = this.respuestasCorrectas[preguntaId];
     return respuestasCorrectas.length === respuestasUsuario.length &&
       respuestasUsuario.every(respuesta => respuestasCorrectas.includes(respuesta)) &&
       respuestasCorrectas.every((respuesta: any) => respuestasUsuario.includes(respuesta));
@@ -104,7 +112,7 @@ export class ExamenComponent implements OnInit, OnDestroy {
     this.examenFinalizado = true;
     this.puntuacion = 0;
     this.preguntas.forEach(pregunta => {
-      if (this.esRespuestaCorrecta(pregunta)) {
+      if (this.esRespuestaCorrecta(pregunta.id)) {
         this.puntuacion += 1;
       }
     });
@@ -146,10 +154,10 @@ export class ExamenComponent implements OnInit, OnDestroy {
   processPreguntaText(text: string): string {
     return text.replace(/\r\n/g, '<br>');
   }
+
   ngOnDestroy(): void {
     sessionStorage.removeItem('examenNombre');
   }
-
 
   openResultDialog(): void {
     const tiempo = (new Date().getTime() - this.fechaDeInicio.getTime()) / 1000;
