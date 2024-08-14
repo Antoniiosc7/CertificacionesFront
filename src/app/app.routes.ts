@@ -12,6 +12,7 @@ import {PrivHomeComponent} from "./pages/priv-home/priv-home.component";
 import {AdminComponent} from "./pages/admin/admin.component";
 import {CertificacionComponent} from "./pages/certificacion/certificacion.component";
 import {AuthGuardWithRedirect} from "./guards/auth-guard-with-redirect.guard";
+import {ProjectsComponent} from "./pages/projects/projects.component";
 
 export const routes: Routes = [
   {
@@ -65,6 +66,11 @@ export const routes: Routes = [
   {
     path: 'certificacion/:id/docs',
     component: DocsComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'certificacion/:cert/projects',
+    component: ProjectsComponent,
     canActivate: [AuthGuard]
   }
 ];
