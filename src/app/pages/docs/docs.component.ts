@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterLink, RouterOutlet } from '@angular/router';
+import {ActivatedRoute, Router, RouterLink, RouterOutlet} from '@angular/router';
 import { NgDocNavbarComponent, NgDocRootComponent, NgDocSidebarComponent } from '@ng-doc/app';
 import { NavigationComponent } from '../../component/navigation/navigation.component';
 import { ApiService } from '../../services/api.service';
@@ -29,7 +29,7 @@ export class DocsComponent implements OnInit {
   constructor(
     private apiService: ApiService,
     private route: ActivatedRoute,
-    private location: Location
+    private router: Router
 ) {
     this.certificacionId = this.route.snapshot.paramMap.get('id');
   }
@@ -44,6 +44,6 @@ export class DocsComponent implements OnInit {
   }
 
   goBack(): void {
-    this.location.back();
+    this.router.navigate(['/home']);
   }
 }
