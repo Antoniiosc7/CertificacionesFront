@@ -1,4 +1,7 @@
+<app-loading-spinner *ngIf="loading"></app-loading-spinner>
+
 <br>
+
 <div *ngIf="user" class="user-container">
   <div class="user-info">
     <h2>Perfil de Usuario</h2>
@@ -13,37 +16,52 @@
 
 <form (ngSubmit)="applyFilters($event)" class="filter-form">
   <div class="filter-container">
-    <mat-form-field class="filter-field custom-form-field">
-      <mat-label>Capítulo del Examen</mat-label>
-      <mat-select [(value)]="selectedChapter" (selectionChange)="applyFilter($event.value)" class="custom-select">
-        <mat-option *ngFor="let capitulo of capitulosDisponibles" [value]="capitulo">
-          {{ capitulo }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+    <div class="filter-row">
 
-    <mat-form-field class="filter-field custom-form-field">
-      <mat-label>Nombre del Examen</mat-label>
-      <mat-select [(value)]="selectedExam" (selectionChange)="applyFilterByName($event.value)" class="custom-select">
-        <mat-option *ngFor="let examen of examenesDisponibles" [value]="examen">
-          {{ examen }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+      <mat-form-field class="filter-field custom-form-field">
+        <mat-label>Certificación</mat-label>
+        <mat-select [(value)]="selectedCertification" (selectionChange)="applyFilterByCertification($event.value)" class="custom-select">
+          <mat-option *ngFor="let certificacion of certificacionesDisponibles" [value]="certificacion">
+            {{ certificacion }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
-    <mat-form-field class="filter-field custom-form-field">
-      <mat-label>Fecha de Inicio</mat-label>
-      <input matInput [matDatepicker]="picker1" placeholder="Selecciona una fecha" (dateChange)="applyDateFilter($event.value, 'start')" (focus)="openDatePicker1()" class="custom-input">
-      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-      <mat-datepicker #picker1></mat-datepicker>
-    </mat-form-field>
+      <mat-form-field class="filter-field custom-form-field">
+        <mat-label>Nombre del Examen</mat-label>
+        <mat-select [(value)]="selectedExam" (selectionChange)="applyFilterByName($event.value)" class="custom-select">
+          <mat-option *ngFor="let examen of examenesDisponibles" [value]="examen">
+            {{ examen }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
-    <mat-form-field class="filter-field custom-form-field">
-      <mat-label>Fecha Fin</mat-label>
-      <input matInput [matDatepicker]="picker2" placeholder="Selecciona una fecha" (dateChange)="applyDateFilter($event.value, 'end')" (focus)="openDatePicker2()" class="custom-input">
-      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-      <mat-datepicker #picker2></mat-datepicker>
-    </mat-form-field>
+      <mat-form-field class="filter-field custom-form-field">
+        <mat-label>Capítulo del Examen</mat-label>
+        <mat-select [(value)]="selectedChapter" (selectionChange)="applyFilter($event.value)" class="custom-select">
+          <mat-option *ngFor="let capitulo of capitulosDisponibles" [value]="capitulo">
+            {{ capitulo }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    </div>
+
+    <div class="filter-row">
+      <mat-form-field class="filter-field custom-form-field">
+        <mat-label>Fecha de Inicio</mat-label>
+        <input matInput [matDatepicker]="picker1" placeholder="Selecciona una fecha" (dateChange)="applyDateFilter($event.value, 'start')" (focus)="openDatePicker1()" class="custom-input">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field class="filter-field custom-form-field">
+        <mat-label>Fecha Fin</mat-label>
+        <input matInput [matDatepicker]="picker2" placeholder="Selecciona una fecha" (dateChange)="applyDateFilter($event.value, 'end')" (focus)="openDatePicker2()" class="custom-input">
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </mat-form-field>
+    </div>
   </div>
   <div class="button-container">
     <button mat-raised-button color="primary" type="submit" class="filter-button">Aplicar Filtros</button>
@@ -54,6 +72,11 @@
 <div *ngIf="resultadosConDetalles.data.length > 0" class="result-container">
   <h3>Últimos Resultados de Exámenes</h3>
   <table mat-table [dataSource]="resultadosConDetalles" class="mat-elevation-z8 custom-table">
+
+    <ng-container matColumnDef="certificacionNombre">
+      <th mat-header-cell *matHeaderCellDef> Certificación </th>
+      <td mat-cell *matCellDef="let elemento"> {{elemento.certificacionNombre}} </td>
+    </ng-container>
 
     <ng-container matColumnDef="capituloExamen">
       <th mat-header-cell *matHeaderCellDef> Capítulo del Examen </th>
@@ -73,11 +96,6 @@
     <ng-container matColumnDef="fechaDeInicio">
       <th mat-header-cell *matHeaderCellDef> Fecha de Inicio </th>
       <td mat-cell *matCellDef="let elemento"> {{elemento.fechaDeInicio | date:'medium'}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="fechaFin">
-      <th mat-header-cell *matHeaderCellDef> Fecha Fin </th>
-      <td mat-cell *matCellDef="let elemento"> {{elemento.fechaFin | date:'medium'}} </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

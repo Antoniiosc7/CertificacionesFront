@@ -3,7 +3,6 @@ import { AuthService } from "../../services/authService";
 import { ActivatedRoute } from "@angular/router";
 import {DatePipe, NgForOf, NgIf} from "@angular/common";
 import { ResultadoService } from "../../services/resultadoService";
-import { ExamenService } from "../../services/examen.service";
 import {combineLatest, Subscription} from 'rxjs';
 import { map } from 'rxjs/operators';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
@@ -20,6 +19,8 @@ import {MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatNativeDateModule, MatOption} from 
 import {FormsModule} from "@angular/forms";
 import {MatSelect} from "@angular/material/select";
 import {MatButton} from "@angular/material/button";
+import {MatProgressSpinner} from "@angular/material/progress-spinner";
+import {LoadingSpinnerComponent} from "../../component/loading-spinner/loading-spinner.component";
 
 @Component({
   selector: 'app-profile',
@@ -41,7 +42,9 @@ import {MatButton} from "@angular/material/button";
     FormsModule,
     MatSelect,
     MatOption,
-    MatButton
+    MatButton,
+    MatProgressSpinner,
+    LoadingSpinnerComponent
   ],
   providers: [ {provide: MAT_DATE_LOCALE, useValue: 'es-ES' }],
   templateUrl: './profile.component.html',
@@ -49,42 +52,52 @@ import {MatButton} from "@angular/material/button";
 })
 export class ProfileComponent implements OnInit, AfterViewInit, OnDestroy, OnChanges {
   user: any;
+  loading: boolean = false;
   filterChapter: string = '';
   startDateFilter: Date | null = null;
   endDateFilter: Date | null = null;
-  selectedChapter: string | null = null; // Add this line
-  selectedExam: string | null = null; // Add this line if missing
+  selectedChapter: string | null = null;
+  selectedExam: string | null = null;
+  selectedCertification: string | null = null;
   resultadosConDetalles = new MatTableDataSource<any>([]);
-  displayedColumns: string[] = ['capituloExamen', 'nombreExamen', 'resultado', 'fechaDeInicio', 'fechaFin'];
-  //@ViewChild(MatPaginator) paginator!: MatPaginator;
+  displayedColumns: string[] = ['certificacionNombre', 'nombreExamen', 'capituloExamen',  'resultado', 'fechaDeInicio'];
   @ViewChild('picker1') datePicker1!: MatDatepicker<Date>;
   @ViewChild('picker2') datePicker2!: MatDatepicker<Date>;
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
   capitulosDisponibles: string[] = [];
   examenesDisponibles: string[] = [];
+  certificacionesDisponibles: string[] = [];
   private subscription: Subscription = new Subscription();
 
   constructor(
     private authService: AuthService,
     private resultadoService: ResultadoService,
-    private examenService: ExamenService,
     private route: ActivatedRoute
   ) {}
+
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['selectedChapter'] || changes['selectedExam'] || changes['startDateFilter'] || changes['endDateFilter']) {
+    if (changes['selectedChapter'] || changes['selectedExam'] || changes['startDateFilter'] || changes['endDateFilter'] || changes['selectedCertification']) {
       this.applyFilters({});
     }
   }
+
   ngOnInit(): void {
     const username = localStorage.getItem('username');
     const id = localStorage.getItem('idUser');
 
     if (id) {
-      this.subscription.add(this.loadUserExamResults(Number(id)).subscribe(resultadosConDetalles => {
-        this.resultadosConDetalles.data = resultadosConDetalles;
-        if (this.paginator) {
-          this.resultadosConDetalles.paginator = this.paginator;
-          this.paginator.firstPage();
+      this.loading = true;
+      this.subscription.add(this.loadUserExamResults(Number(id)).subscribe({
+        next: (resultadosConDetalles) => {
+          this.resultadosConDetalles.data = resultadosConDetalles;
+          if (this.paginator) {
+            this.resultadosConDetalles.paginator = this.paginator;
+            this.paginator.firstPage();
+          }
+          this.loading = false;
+        },
+        error: () => {
+          this.loading = false;
         }
       }));
     }
@@ -98,25 +111,31 @@ export class ProfileComponent implements OnInit, AfterViewInit, OnDestroy, OnCha
       }));
     }
   }
+
   clearFilters() {
-    // Reset filter fields
     this.filterChapter = '';
     this.startDateFilter = null;
     this.endDateFilter = null;
-
-    // Reset dropdown selections
     this.selectedChapter = null;
     this.selectedExam = null;
+    this.selectedCertification = null;
 
-    // Reload user exam results without filters
-    this.loadUserExamResults(Number(localStorage.getItem('idUser'))).subscribe(resultadosConDetalles => {
-      this.resultadosConDetalles.data = resultadosConDetalles;
-      if (this.paginator) {
-        this.resultadosConDetalles.paginator = this.paginator;
-        this.paginator.firstPage();
+    this.loading = true;
+    this.loadUserExamResults(Number(localStorage.getItem('idUser'))).subscribe({
+      next: (resultadosConDetalles) => {
+        this.resultadosConDetalles.data = resultadosConDetalles;
+        if (this.paginator) {
+          this.resultadosConDetalles.paginator = this.paginator;
+          this.paginator.firstPage();
+        }
+        this.loading = false;
+      },
+      error: () => {
+        this.loading = false;
       }
     });
   }
+
   applyFilterByName(value: string): void {
     const filterValue = value.trim().toLowerCase();
 
@@ -129,8 +148,55 @@ export class ProfileComponent implements OnInit, AfterViewInit, OnDestroy, OnCha
       this.resultadosConDetalles.data = filteredData;
     }
 
-    this.resultadosConDetalles.paginator = this.paginator; // Restablecer el paginador después de filtrar
-    this.paginator.firstPage(); // Reiniciar el paginador a la primera página
+    this.resultadosConDetalles.paginator = this.paginator;
+    this.paginator.firstPage();
+  }
+
+  applyFilterByCertification(value: string): void {
+    const filterValue = value.trim().toLowerCase();
+    this.loading = true;
+
+    // Clear the filter before applying the new one
+    this.loadUserExamResults(Number(localStorage.getItem('idUser'))).subscribe({
+      next: (resultadosConDetalles) => {
+        this.resultadosConDetalles.data = resultadosConDetalles;
+        if (!filterValue) {
+          if (this.paginator) {
+            this.resultadosConDetalles.paginator = this.paginator;
+            this.paginator.firstPage();
+          }
+        } else {
+          const filteredData = this.resultadosConDetalles.data.filter(item =>
+            item.certificacionNombre.toLowerCase().includes(filterValue)
+          );
+          this.resultadosConDetalles.data = filteredData;
+          this.resultadosConDetalles.paginator = this.paginator;
+          this.paginator.firstPage();
+        }
+        this.loading = false;
+      },
+      error: () => {
+        this.loading = false;
+      }
+    });
+  }
+
+  applyFilters($event: any) {
+    this.loading = true;
+
+    this.loadUserExamResults(Number(localStorage.getItem('idUser'))).subscribe({
+      next: (resultadosConDetalles) => {
+        this.resultadosConDetalles.data = resultadosConDetalles;
+        this.applyFilter(this.filterChapter);
+        this.applyDateFilter(this.startDateFilter, 'start');
+        this.applyDateFilter(this.endDateFilter, 'end');
+        this.applyFilterByCertification(this.selectedCertification || '');
+        this.loading = false;
+      },
+      error: () => {
+        this.loading = false;
+      }
+    });
   }
 
   ngAfterViewInit(): void {
@@ -153,31 +219,23 @@ export class ProfileComponent implements OnInit, AfterViewInit, OnDestroy, OnCha
     }
   }
 
-
-
   loadUserExamResults(userId: number) {
-    return combineLatest([
-      this.resultadoService.getResultadosByUserId(userId),
-      this.examenService.getAllExamenes()
-    ]).pipe(
-      map(([resultados, examenes]) => {
-        const detalles = resultados.map((resultado: any) => {
-          const examenInfo = examenes.find(examen => examen.examenId === resultado.examenId);
-          return {
-            ...resultado,
-            nombreExamen: examenInfo ? examenInfo.nombre : 'Desconocido',
-            capituloExamen: examenInfo ? examenInfo.chapter : 'Desconocido'
-          };
-        });
+    return this.resultadoService.getResultadosByUserId(userId).pipe(
+      map((resultados: any[]) => {
+        const detalles = resultados.map((resultado: any) => ({
+          ...resultado,
+          nombreExamen: resultado.nombre,
+          capituloExamen: resultado.chapter,
+          certificacionNombre: resultado.certificacionNombre
+        }));
 
         this.capitulosDisponibles = detalles.map((res: any) => res.capituloExamen).filter((value: string, index: number, self: string[]) => self.indexOf(value) === index);
         this.examenesDisponibles = detalles.map((res: any) => res.nombreExamen).filter((value: string, index: number, self: string[]) => self.indexOf(value) === index);
+        this.certificacionesDisponibles = detalles.map((res: any) => res.certificacionNombre).filter((value: string, index: number, self: string[]) => self.indexOf(value) === index);
         return detalles;
       })
     );
   }
-
-
 
   openDatePicker1() {
     this.datePicker1.open();
@@ -201,15 +259,10 @@ export class ProfileComponent implements OnInit, AfterViewInit, OnDestroy, OnCha
       );
       this.resultadosConDetalles.data = filteredData;
     }
-    this.resultadosConDetalles.paginator = this.paginator; // Reset paginator after filtering
-    this.paginator.firstPage(); // Reset paginator to the first page
+    this.resultadosConDetalles.paginator = this.paginator;
+    this.paginator.firstPage();
   }
 
-  applyFilters($event: any) {
-    this.applyFilter(this.filterChapter);
-    this.applyDateFilter(this.startDateFilter, 'start');
-    this.applyDateFilter(this.endDateFilter, 'end');
-  }
   applyDateFilter(date: Date | null, type: 'start' | 'end') {
     if (type === 'start') {
       this.startDateFilter = date;
@@ -217,6 +270,6 @@ export class ProfileComponent implements OnInit, AfterViewInit, OnDestroy, OnCha
       this.endDateFilter = date;
     }
     this.loadUserExamResults(Number(localStorage.getItem('idUser')));
-    this.paginator.firstPage(); // Reset paginator to the first page
+    this.paginator.firstPage();
   }
 }
