@@ -13,6 +13,9 @@ import {AdminComponent} from "./pages/admin/admin.component";
 import {CertificacionComponent} from "./pages/certificacion/certificacion.component";
 import {AuthGuardWithRedirect} from "./guards/auth-guard-with-redirect.guard";
 import {ProjectsComponent} from "./pages/projects/projects.component";
+import {AuthAdminGuard} from "./guards/auth-admin.guard";
+import {ExamenesComponent} from "./pages/admin/examenes/examenes.component";
+import {PreguntasComponent} from "./pages/admin/examenes/preguntas/preguntas.component";
 
 export const routes: Routes = [
   {
@@ -55,9 +58,18 @@ export const routes: Routes = [
   {
     path: 'admin',
     component: AdminComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthAdminGuard]
   },
-
+  {
+    path: 'admin/examenes',
+    component: ExamenesComponent,
+    canActivate: [AuthAdminGuard]
+  },
+  {
+    path: 'admin/examenes/:id/preguntas',
+    component: PreguntasComponent,
+    canActivate: [AuthAdminGuard]
+  },
   {
     path: 'certificacion/:id',
     component: CertificacionComponent,

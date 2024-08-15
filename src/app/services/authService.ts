@@ -92,7 +92,7 @@ export class AuthService {
       })
     );
   }
-  /*
+
   private adminUrl = `${API_URL}/api/auth/is_admin`;
   isAdmin(): Observable<boolean> {
     const headers = { 'Authorization': 'Bearer ' + this.getToken() };
@@ -103,7 +103,7 @@ export class AuthService {
       })
     );
   }
-  */
+
 
   getUserProfile(username: string): Observable<any> {
     return this.http.get(`${API_URL}/api/users/profile/${username}`,this.getHttpOptions());

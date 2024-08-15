@@ -1,0 +1,47 @@
+<div *ngIf="loading">
+  <app-loading-spinner></app-loading-spinner>
+</div>
+
+<div class="examenes-container">
+  <div class="header">
+    <button (click)="goBack()" class="btn-back">Volver</button>
+  </div>
+  <h2>Exámenes</h2>
+  <table class="examenes-table">
+    <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Descripción</th>
+      <th>Capítulo</th>
+      <th>Certificación</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let examen of examenes">
+      <td>{{ examen.nombre }}</td>
+      <td>{{ examen.descripcion }}</td>
+      <td>{{ examen.chapter }}</td>
+      <td>{{ examen.certificacion.nombre }}</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <h2>Crear Nuevo Examen</h2>
+  <form [formGroup]="examenForm" (ngSubmit)="createExamen()">
+    <label for="chapter">Capítulo:</label>
+    <input id="chapter" formControlName="chapter" type="text" required>
+
+    <label for="nombre">Nombre:</label>
+    <input id="nombre" formControlName="nombre" type="text" required>
+
+    <label for="descripcion">Descripción:</label>
+    <input id="descripcion" formControlName="descripcion" type="text" required>
+
+    <label for="certificacion">Certificación:</label>
+    <select id="certificacion" formControlName="certificacion" required>
+      <option *ngFor="let cert of certificaciones" [value]="cert.id">{{ cert.nombre }}</option>
+    </select>
+
+    <button type="submit" [disabled]="examenForm.invalid">Crear Examen</button>
+  </form>
+</div>
