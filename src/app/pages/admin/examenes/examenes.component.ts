@@ -6,7 +6,7 @@ import { ApiService } from '../../../services/api.service';
 import { Certificaciones } from '../../../models/certificaciones.model';
 import {NgForOf, NgIf} from '@angular/common';
 import { LoadingSpinnerComponent } from '../../../component/loading-spinner/loading-spinner.component';
-import {Router} from "@angular/router";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-examenes',
@@ -31,8 +31,8 @@ export class ExamenesComponent implements OnInit {
     private adminService: AdminService,
     private apiService: ApiService,
     private fb: FormBuilder,
-    private router: Router)
-  {
+    private router: Router
+  ) {
     this.examenForm = this.fb.group({
       chapter: ['', Validators.required],
       nombre: ['', Validators.required],
@@ -77,6 +77,16 @@ export class ExamenesComponent implements OnInit {
         this.examenForm.reset();
       });
     }
+  }
+
+  deleteExamen(id: number): void {
+    this.adminService.deleteExamen(id).subscribe(() => {
+      this.examenes = this.examenes.filter(examen => examen.examenId !== id);
+    });
+  }
+
+  navigateToPreguntas(id: number): void {
+    this.router.navigate([`/admin/examenes/${id}/preguntas`]);
   }
 
   goBack(): void {

@@ -1,0 +1,65 @@
+<div *ngIf="loading">
+  <app-loading-spinner></app-loading-spinner>
+</div>
+
+<div class="preguntas-container">
+  <div class="header">
+    <button (click)="goBack()" class="btn-back">Volver</button>
+  </div>
+  <h2>Preguntas</h2>
+  <table class="preguntas-table">
+    <thead>
+    <tr>
+      <th>Pregunta</th>
+      <th>Código</th>
+      <th>Opciones</th>
+      <th>Respuestas Correctas</th>
+      <th>Explicación</th>
+      <th>Eliminar</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let pregunta of preguntas">
+      <td>{{ pregunta.pregunta }}</td>
+      <td>{{ pregunta.codigo }}</td>
+      <td>{{ pregunta.opcion1 }}, {{ pregunta.opcion2 }}, {{ pregunta.opcion3 }}, {{ pregunta.opcion4 }}</td>
+      <td>{{ pregunta.respuestasCorrectas.join(', ') }}</td>
+      <td>{{ pregunta.explicacion }}</td>
+      <td class="actions">
+        <button class="btn btn-delete" (click)="deletePregunta(pregunta.id)">
+          <i class="fa-solid fa-trash"></i>
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <h2>Crear Nueva Pregunta</h2>
+  <form [formGroup]="preguntaForm" (ngSubmit)="createPregunta()">
+    <label for="pregunta">Pregunta:</label>
+    <input id="pregunta" formControlName="pregunta" type="text" required>
+
+    <label for="codigo">Código:</label>
+    <input id="codigo" formControlName="codigo" type="text">
+
+    <label for="opcion1">Opción 1:</label>
+    <input id="opcion1" formControlName="opcion1" type="text" required>
+
+    <label for="opcion2">Opción 2:</label>
+    <input id="opcion2" formControlName="opcion2" type="text" required>
+
+    <label for="opcion3">Opción 3:</label>
+    <input id="opcion3" formControlName="opcion3" type="text">
+
+    <label for="opcion4">Opción 4:</label>
+    <input id="opcion4" formControlName="opcion4" type="text">
+
+    <label for="respuestasCorrectas">Respuestas Correctas:</label>
+    <input id="respuestasCorrectas" formControlName="respuestasCorrectas" type="text" required>
+
+    <label for="explicacion">Explicación:</label>
+    <input id="explicacion" formControlName="explicacion" type="text">
+
+    <button type="submit" [disabled]="preguntaForm.invalid">Crear Pregunta</button>
+  </form>
+</div>

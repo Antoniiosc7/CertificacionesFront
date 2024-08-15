@@ -15,7 +15,7 @@ import {AuthGuardWithRedirect} from "./guards/auth-guard-with-redirect.guard";
 import {ProjectsComponent} from "./pages/projects/projects.component";
 import {AuthAdminGuard} from "./guards/auth-admin.guard";
 import {ExamenesComponent} from "./pages/admin/examenes/examenes.component";
-import {PreguntasComponent} from "./pages/admin/examenes/preguntas/preguntas.component";
+import {PreguntasComponent} from "./pages/admin/preguntas/preguntas.component";
 
 export const routes: Routes = [
   {
