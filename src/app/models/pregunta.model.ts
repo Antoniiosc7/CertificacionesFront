@@ -1,17 +1,17 @@
-export class Pregunta {
+export interface Pregunta {
   id: number;
   pregunta: string;
-  codigo?: string;
-  opcion1?: string;
-  opcion2?: string;
-  opcion3?: string;
-  opcion4?: string;
-  opcion5?: string;
-  opcion6?: string;
-  opcion7?: string;
-  opcion8?: string;
-  opcion9?: string;
-  opcion10?: string;
+  codigo: string | null;
+  opcion1: string;
+  opcion2: string;
+  opcion3: string | null;
+  opcion4: string | null;
+  opcion5: string | null;
+  opcion6: string | null;
+  opcion7: string | null;
+  opcion8: string | null;
+  opcion9: string | null;
+  opcion10: string | null;
   respuestasCorrectas: string[];
   explicacion: string;
   examen: {
@@ -19,20 +19,12 @@ export class Pregunta {
     chapter: string;
     nombre: string;
     descripcion: string;
-  };
-  opciones?: string[];
-
-  constructor() {
-    this.id = 0;
-    this.pregunta = '';
-    this.respuestasCorrectas = [];
-    this.explicacion = '';
-    this.examen = {
-      examenId: 0,
-      chapter: '',
-      nombre: '',
-      descripcion: ''
+    certificacion: {
+      id: number;
+      nombre: string;
+      descripcion: string;
+      codCertificacion: string;
+      imgUrl: string;
     };
-    this.opciones = [];
-  }
+  };
 }

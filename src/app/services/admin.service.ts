@@ -18,22 +18,22 @@ export class AdminService {
   }
 
   getPreguntasByExamenId(examenId: number): Observable<Pregunta[]> {
-    return this.http.get<Pregunta[]>(`${this.apiUrl}/${examenId}/preguntas`);
+    return this.http.get<Pregunta[]>(`${this.apiUrl}/${examenId}/preguntas`, this.getHttpOptions());
   }
 
   createPreguntaForExamen(examenId: number, pregunta: Pregunta): Observable<Pregunta> {
-    return this.http.post<Pregunta>(`${this.urlAPI}/examenes/${examenId}/preguntas`, pregunta);
+    return this.http.post<Pregunta>(`${this.urlAPI}/examenes/${examenId}/preguntas`, pregunta, this.getHttpOptions());
   }
 
   deletePregunta(preguntaId: number): Observable<void> {
-    return this.http.delete<void>(`${this.urlAPI}/preguntas/${preguntaId}`);
+    return this.http.delete<void>(`${this.urlAPI}/preguntas/${preguntaId}`, this.getHttpOptions());
   }
 
   createExamen(examen: Examen): Observable<Examen> {
     return this.http.post<Examen>(this.apiUrl, examen,this.getHttpOptions());
   }
   deleteExamen(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`, this.getHttpOptions());
   }
   private getHttpOptions() {
     return {

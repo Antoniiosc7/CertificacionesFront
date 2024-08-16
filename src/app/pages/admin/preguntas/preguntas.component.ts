@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AdminService } from '../../../services/admin.service';
 import { LoadingSpinnerComponent } from '../../../component/loading-spinner/loading-spinner.component';
 import { NgForOf, NgIf } from '@angular/common';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-preguntas',
@@ -13,7 +14,8 @@ import { NgForOf, NgIf } from '@angular/common';
     ReactiveFormsModule,
     LoadingSpinnerComponent,
     NgIf,
-    NgForOf
+    NgForOf,
+    MatTooltipModule
   ],
   templateUrl: './preguntas.component.html',
   styleUrls: ['./preguntas.component.css']
@@ -36,6 +38,12 @@ export class PreguntasComponent implements OnInit {
       opcion2: ['', Validators.required],
       opcion3: [''],
       opcion4: [''],
+      opcion5: [''],
+      opcion6: [''],
+      opcion7: [''],
+      opcion8: [''],
+      opcion9: [''],
+      opcion10: [''],
       respuestasCorrectas: ['', Validators.required],
       explicacion: ['']
     });
@@ -43,13 +51,23 @@ export class PreguntasComponent implements OnInit {
 
   ngOnInit(): void {
     this.examenId = Number(this.route.snapshot.paramMap.get('id'));
-    console.log(this.examenId)
     this.loadPreguntas();
   }
 
   loadPreguntas(): void {
     this.adminService.getPreguntasByExamenId(this.examenId).subscribe((preguntas: Pregunta[]) => {
-      this.preguntas = preguntas;
+      this.preguntas = preguntas.map(pregunta => {
+        let respuestasCorrectas;
+        try {
+          respuestasCorrectas = JSON.parse(pregunta.respuestasCorrectas as unknown as string);
+        } catch {
+          respuestasCorrectas = 'Formato incorrecto';
+        }
+        return {
+          ...pregunta,
+          respuestasCorrectas
+        };
+      });
       this.loading = false;
     });
   }
@@ -59,7 +77,7 @@ export class PreguntasComponent implements OnInit {
       const newPregunta: Pregunta = {
         ...this.preguntaForm.value,
         respuestasCorrectas: this.preguntaForm.value.respuestasCorrectas.split(',').map((resp: string) => resp.trim()),
-        examen: { examenId: Number(this.examenId), chapter: '', nombre: '', descripcion: '' }
+        examen: { examenId: this.examenId, chapter: '', nombre: '', descripcion: '' }
       };
       this.adminService.createPreguntaForExamen(this.examenId, newPregunta).subscribe((pregunta: Pregunta) => {
         this.preguntas.push(pregunta);
@@ -77,4 +95,6 @@ export class PreguntasComponent implements OnInit {
   goBack(): void {
     window.history.back();
   }
+
+  protected readonly Array = Array;
 }
