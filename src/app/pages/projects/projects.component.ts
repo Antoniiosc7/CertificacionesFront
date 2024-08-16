@@ -92,6 +92,8 @@ export class ProjectsComponent implements OnInit {
       return 'assets/icons/pdf-icon.png';
     } else if (fileName.endsWith('.doc') || fileName.endsWith('.docx')) {
       return 'assets/icons/word-icon.png';
+    } else if (fileName.endsWith('.zip')){
+      return 'assets/icons/zip-icon.png';
     }
     return 'assets/icons/default-icon.png';
   }
