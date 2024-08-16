@@ -152,7 +152,7 @@ export class ExamenComponent implements OnInit, OnDestroy {
   }
 
   processPreguntaText(text: string): string {
-    return text.replace(/\r\n/g, '<br>');
+    return text.replace(/\n/g, '<br>');
   }
 
   ngOnDestroy(): void {

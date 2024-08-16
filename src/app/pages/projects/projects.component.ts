@@ -12,7 +12,7 @@ import {
   MatHeaderRow, MatHeaderRowDef, MatRow, MatRowDef,
   MatTable
 } from '@angular/material/table';
-import { NgForOf, NgIf } from "@angular/common";
+import {Location, NgForOf, NgIf} from "@angular/common";
 import {LoadingSpinnerComponent} from "../../component/loading-spinner/loading-spinner.component";
 
 @Component({
@@ -43,7 +43,7 @@ export class ProjectsComponent implements OnInit {
   links: any[] = [];
   loading: boolean = false;
 
-  constructor(private http: HttpClient, private route: ActivatedRoute) {}
+  constructor(private http: HttpClient, private route: ActivatedRoute, private location: Location ) {}
 
   ngOnInit(): void {
     this.cert = this.route.snapshot.paramMap.get('cert') || '';
@@ -99,6 +99,9 @@ export class ProjectsComponent implements OnInit {
   openFile(fileName: string): void {
     const fileUrl = `${API_URL}/api/files/view/${fileName}`;
     window.open(fileUrl, '_blank');
+  }
+  goBack(): void {
+    this.location.back();
   }
 }
 

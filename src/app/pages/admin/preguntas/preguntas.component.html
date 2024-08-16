@@ -1,0 +1,113 @@
+<div *ngIf="loading" class="loading-container">
+  <app-loading-spinner></app-loading-spinner>
+</div>
+<div class="header">
+  <button (click)="goBack()" class="btn-back">Volver</button>
+</div>
+<div class="preguntas-container">
+  <h2>Preguntas</h2>
+  <table class="preguntas-table">
+    <thead>
+    <tr>
+      <th>Pregunta</th>
+      <th>Código</th>
+      <th>Opciones</th>
+      <th>Respuestas Correctas</th>
+      <th>Explicación</th>
+      <th>Eliminar</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let pregunta of preguntas">
+      <td>{{ pregunta.pregunta }}</td>
+      <td>{{ pregunta.codigo }}</td>
+      <td>{{ pregunta.opcion1 }}, {{ pregunta.opcion2 }}, {{ pregunta.opcion3 }}, {{ pregunta.opcion4 }}, {{ pregunta.opcion5 }}, {{ pregunta.opcion6 }}, {{ pregunta.opcion7 }}, {{ pregunta.opcion8 }}, {{ pregunta.opcion9 }}, {{ pregunta.opcion10 }}</td>
+      <td>{{ pregunta.respuestasCorrectas && Array.isArray(pregunta.respuestasCorrectas) ? pregunta.respuestasCorrectas.join(', ') : 'Formato incorrecto' }}</td>
+      <td>{{ pregunta.explicacion }}</td>
+      <td class="actions">
+        <button class="btn btn-delete" (click)="deletePregunta(pregunta.id)">
+          <i class="fa-solid fa-trash"></i>
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <h2>Crear Nueva Pregunta</h2>
+  <form [formGroup]="preguntaForm" (ngSubmit)="createPregunta()" class="pregunta-form">
+    <div class="form-group">
+      <label for="pregunta">Pregunta:</label>
+      <textarea id="pregunta" formControlName="pregunta" required></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="codigo">Código:</label>
+      <textarea id="codigo" formControlName="codigo"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="opcion1">Opción 1:</label>
+      <input id="opcion1" formControlName="opcion1" type="text" required>
+    </div>
+
+    <div class="form-group">
+      <label for="opcion2">Opción 2:</label>
+      <input id="opcion2" formControlName="opcion2" type="text" required>
+    </div>
+
+    <div class="form-group">
+      <label for="opcion3">Opción 3:</label>
+      <input id="opcion3" formControlName="opcion3" type="text">
+    </div>
+
+    <div class="form-group">
+      <label for="opcion4">Opción 4:</label>
+      <input id="opcion4" formControlName="opcion4" type="text">
+    </div>
+
+    <div class="form-group">
+      <label for="opcion5">Opción 5:</label>
+      <input id="opcion5" formControlName="opcion5" type="text">
+    </div>
+
+    <div class="form-group">
+      <label for="opcion6">Opción 6:</label>
+      <input id="opcion6" formControlName="opcion6" type="text">
+    </div>
+
+    <div class="form-group">
+      <label for="opcion7">Opción 7:</label>
+      <input id="opcion7" formControlName="opcion7" type="text">
+    </div>
+
+    <div class="form-group">
+      <label for="opcion8">Opción 8:</label>
+      <input id="opcion8" formControlName="opcion8" type="text">
+    </div>
+
+    <div class="form-group">
+      <label for="opcion9">Opción 9:</label>
+      <input id="opcion9" formControlName="opcion9" type="text">
+    </div>
+
+    <div class="form-group">
+      <label for="opcion10">Opción 10:</label>
+      <input id="opcion10" formControlName="opcion10" type="text">
+    </div>
+
+    <div class="form-group">
+      <label for="respuestasCorrectas">Respuestas Correctas:</label>
+      <input id="respuestasCorrectas" formControlName="respuestasCorrectas" type="text" required>
+      <span matTooltip='El formato correcto es ["A", "E"]' class="info-icon">
+        <i class="fa-solid fa-info-circle"></i>
+      </span>
+    </div>
+
+    <div class="form-group">
+      <label for="explicacion">Explicación:</label>
+      <textarea id="explicacion" formControlName="explicacion"></textarea>
+    </div>
+
+    <button type="submit" [disabled]="preguntaForm.invalid" class="btn-submit">Crear Pregunta</button>
+  </form>
+</div>
